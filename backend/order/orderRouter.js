@@ -55,6 +55,20 @@ router.get('/status/:status', async (req, res, next) => {
     }
 });
 
+router.get('/user/:id/status/:status', async (req, res, next) => {
+    const userId = req.params.id;
+    const orderStatus = req.params.status;
+    try {
+        const order = await orderService.getOrderByUserIdStatus(userId, orderStatus);
+        return res.json(order);
+    } catch (err) {
+        console.log(err);
+        const error = new Error(`No order for the user: ${userId}, status: ${orderStatus}`);
+        error.status = 404;
+        return next(error);
+    }
+})
+
 router.post('/create', async (req, res, next) => {
     try{
         const {userId, menuId} = req.body;
@@ -68,11 +82,12 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
-router.put('/update/:id/status/:status', async(req, res, next) => {
+router.put('/update/:id/status/:status/user/:userid', async(req, res, next) => {
     const orderId = req.params.id;
     const status = req.params.status;
+    const userId = req.params.userid;
     try {
-        const updatedOrder = await orderService.updateOrder(orderId, status);
+        const updatedOrder = await orderService.updateOrder(userId, orderId, status);
         return res.json(updatedOrder);
     } catch (err) {
         console.log(err);
