@@ -1,5 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import 'dotenv/config';
 import menu from './menu/menuRouter.js'
 import order from './order/orderRouter.js'
 import script from './script/scriptRouter.js'

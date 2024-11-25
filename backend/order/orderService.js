@@ -3,6 +3,7 @@ import { OrderDataFacade } from "./orderDataFacade.js";
 import { UserService } from "../user/userService.js";
 import { MenuService } from "../menu/menuService.js";
 import { OrderStatus } from "../code.js"
+import { EmailService } from "../framework/emailService.js";
 
 export class OrderService extends Service{
     constructor(){
@@ -10,6 +11,7 @@ export class OrderService extends Service{
         this.orderDataFacade = new OrderDataFacade();
         this.userService = new UserService();
         this.menuService = new MenuService();
+        this.emailService = new EmailService();
     }
 
     getAllOrders = async () =>{
@@ -88,6 +90,10 @@ export class OrderService extends Service{
         await this.orderDataFacade.createOrder(OrderStatus.REQUESTED, aUser, aMenu);
 
         const newOrder = await this.orderDataFacade.getOrderByUserIdMenuIdStatus(userId, menuId, OrderStatus.REQUESTED);
+
+        this.emailService.sendMailToOwnerForNewOrder(newOrder, aMenu, aUser);
+        this.emailService.sendMailToUserForNewOrder(newOrder, aMenu, aUser);
+
         return newOrder;
     }
 
@@ -108,6 +114,9 @@ export class OrderService extends Service{
         } else {
             console.log(`Order:${newStatus} updated`);
             const updatedOrder = await this.orderDataFacade.getOrderById(orderId);
+            const aUser = await this.userService.getUserById(updatedOrder.userId);
+            const aMenu = await this.menuService.getMenuById(updatedOrder.menuId);
+            this.emailService.sendMailToUserForOrderUpdate(updatedOrder, aMenu, aUser); 
             return updatedOrder;
         }
     }
