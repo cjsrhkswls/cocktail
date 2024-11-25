@@ -57,8 +57,8 @@ router.get('/type/:type', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
     try {
-        const { userEmail, userType } = req.body;
-        const newUser = await userService.createUser({userEmail, userType});
+        const { userNickname, userEmail, userType } = req.body;
+        const newUser = await userService.createUser({userNickname, userEmail, userType});
         return res.json(newUser);
     } catch(err){
         console.log(err);
@@ -71,8 +71,8 @@ router.post('/create', async (req, res, next) => {
 router.put('/update/:id', async (req, res, next) => {
     const userId = req.params.id;
     try {
-        const { userEmail, userType } = req.body;
-        const updatedUser = await userService.updateUser(userId, {userEmail, userType});
+        const { userNickname, userEmail, userType } = req.body;
+        const updatedUser = await userService.updateUser(userId, {userNickname, userEmail, userType});
         return res.json(updatedUser);
     } catch(err) {
         console.log(err);

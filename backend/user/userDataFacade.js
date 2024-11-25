@@ -30,6 +30,7 @@ export class UserDataFacade {
     createUser = async (newUser) => {
         await User.create(
             {
+                userNickname: newUser.userNickname,
                 userEmail: newUser.userEmail,
                 userType: newUser.userType,
             })
@@ -42,6 +43,7 @@ export class UserDataFacade {
     updateUser = async (userId, newUser) => {
         const [updatedRows] = await User.update(
             {
+                userNickname: newUser.userNickname,
                 userEmail: newUser.userEmail,
                 userType: newUser.userType
             },

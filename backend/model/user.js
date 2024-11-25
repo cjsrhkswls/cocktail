@@ -13,6 +13,13 @@ User.init(
                 notEmpty: true,
             }
         },
+        userNickname: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+            }
+        },
         userEmail: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -33,11 +40,3 @@ User.init(
         modelName: 'User'
     }
 );
-
-User.associate = (models) => {
-    User.belongsToMany(models.Menu, {
-        through: models.Order,
-        foreignKey: 'userId',
-        otherKey: 'menuId',
-    });
-};

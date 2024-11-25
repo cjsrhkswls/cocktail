@@ -22,19 +22,25 @@ Order.init(
         }
     },
     {
+        indexes: [
+            {
+                unique: false,
+                fields: ['userId', 'menuId']
+            }
+        ],
         sequelize: conn,
         modelName: 'Order',
     }
 );
 
-Order.associate = (models) => {
-    Order.belongsTo(models.User, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-    });
+// Order.associate = (models) => {
+//     Order.belongsTo(models.User, {
+//         foreignKey: 'userId',
+//         onDelete: 'CASCADE',
+//     });
 
-    Order.belongsTo(models.Menu, {
-        foreignKey: 'menuId',
-        onDelete: 'CASCADE',
-    });
-};
+//     Order.belongsTo(models.Menu, {
+//         foreignKey: 'menuId',
+//         onDelete: 'CASCADE',
+//     });
+// };

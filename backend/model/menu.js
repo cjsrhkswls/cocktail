@@ -48,10 +48,10 @@ Menu.init(
     },
 );
 
-Menu.associate = (models) => {
-    Menu.belongsToMany(models.User, {
-        through: models.Order,
-        foreignKey: 'menuId',
-        otherKey: 'userId'
-    });
-};
+// Menu.associate = (models) => {
+//     Menu.belongsToMany(models.User, {
+//         through: models.Order,
+//         foreignKey: 'menuId',
+//         otherKey: 'userId'
+//     });
+// };

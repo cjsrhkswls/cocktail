@@ -50,8 +50,10 @@ export class UserService extends Service {
     }
 
     createUser = async (newUser) => {
+        console.log(newUser);
         this.checkObjectValue(newUser);
         this.checkStringValue(newUser.userEmail);
+        this.checkStringValue(newUser.userNickname);
         const existingUser = await this.userDataFacade.getUserByEmail(newUser.userEmail);
 
         if (existingUser || existingUser !== null) {
@@ -68,6 +70,7 @@ export class UserService extends Service {
         this.checkObjectValue(updateUser);
         this.checkId(userId);
         this.checkStringValue(updateUser.userEmail);
+        this.checkStringValue(updateUser.userNickname);
 
         const existingUser = await this.userDataFacade.getUserById(userId);
 

@@ -26,9 +26,11 @@ app.listen(PORT, () => {
     console.log(`Server is running on port:${PORT}`);
 })
 
-User.associate({Menu, Order});
-Menu.associate({User, Order});
-Order.associate({User, Menu});
+User.hasMany(Order, {foreignKey: 'userId', onDelete: 'CASCADE'});
+Order.belongsTo(User, {foreignKey: 'userId'});
+
+Menu.hasMany(Order, {foreignKey: 'menuId', onDelete: 'CASCADE'});
+Order.belongsTo(Menu, {foreignKey: 'menuId'});
 
 conn
   .authenticate()

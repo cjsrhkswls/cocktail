@@ -43,8 +43,17 @@ export const reset = (async () => {
             () => {
                 User.create(
                     {
+                        userNickname:'Gwanjin',
                         userEmail: 'cjsrhkswls@gmail.com',
                         userType: UserType.ADMIN,
+                    }
+                );
+
+                User.create(
+                    {
+                        userNickname:'Eileen',
+                        userEmail: 'eileens93@hotmail.com',
+                        userType: UserType.CUSTOMER,
                     }
                 )
             }
