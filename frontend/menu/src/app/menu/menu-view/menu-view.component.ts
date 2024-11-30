@@ -1,5 +1,6 @@
 import { Component, Input, input } from '@angular/core';
 import { Menu } from '../../model/menu';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-menu-view',
@@ -11,6 +12,7 @@ import { Menu } from '../../model/menu';
 export class MenuViewComponent {
 
   @Input() menu:Menu[] = [];
+  @Input() currentUser:User | undefined;
 
   constructor(){}
 }

@@ -14,20 +14,13 @@ export class AuthService {
 
   constructor(public router: Router) { }
 
-  login(): void {
+  login(userData: User): void {
 
     // TODO: Service call is required here
-    let aUser = {
-      userId: 1,
-      userNickname: "jin",
-      userEmail: "cjsrhkswls@gmail.com",
-      userType: "Staff"
-    }
     // TODO: place the below two lines in subscribe
-    this.profile.next(aUser);
-    this.saveUser(aUser);
-
-
+    this.profile.next(userData);
+    this.saveUser(userData);
+    //******************************** */
     if (this.profile.getValue().userType === UserType.ADMIN) {
       this.router.navigate(['/list']);
     } else {

@@ -13,7 +13,7 @@ import { User } from '../model/user';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit{
-  aUser!:User;
+  currentUser!:User;
   menu!:Menu[];
 
   constructor(public menuService:MenuService, public readonly authService: AuthService){}
@@ -23,6 +23,6 @@ export class MenuComponent implements OnInit{
       this.menu = m;
     });
 
-    this.authService.getUserProfile().subscribe(u => this.aUser = u);
+    this.authService.getUserProfile().subscribe(u => this.currentUser = u);
   }
 }
