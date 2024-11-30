@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Menu } from '../model/menu';
 import { of } from 'rxjs';
-import { AlcholLevel } from '../code/alchol-level';
-import { MenuType } from '../code/menu-type';
+import { AlcoholLevel, MenuType } from '../code';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { MenuType } from '../code/menu-type';
 export class MenuService {
 
   menus:Menu[] = [
-    {menuId: 1, menuName: "Vodka Sunrise", menuType:MenuType.COCKTAIL, menuDescription: "Sweet and Sour", alcholLevel: AlcholLevel.LOW, ingredients: ["Vodka", "Orange juice", "Grenadine"], pic:""},
+    {menuId: 1, menuName: "Vodka Sunrise", menuType:MenuType.COCKTAIL, menuDescription: "Sweet and Sour", alcholLevel: AlcoholLevel.LOW},
   ];
 
   constructor() {

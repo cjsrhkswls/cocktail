@@ -3,7 +3,5 @@ export interface Menu {
     menuName: string,
     menuType: string,
     menuDescription: string,
-    ingredients: string[],
     alcholLevel: string,
-    pic:string|undefined,
 }
