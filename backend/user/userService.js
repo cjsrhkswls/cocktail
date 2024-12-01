@@ -50,7 +50,6 @@ export class UserService extends Service {
     }
 
     createUser = async (newUser) => {
-        console.log(newUser);
         this.checkObjectValue(newUser);
         this.checkStringValue(newUser.userEmail);
         this.checkStringValue(newUser.userNickname);
@@ -64,6 +63,27 @@ export class UserService extends Service {
 
         const createdUser = await this.userDataFacade.getUserByEmail(newUser.userEmail);
         return createdUser;   
+    }
+
+    login = async (newUser) => {
+        this.checkObjectValue(newUser);
+        this.checkStringValue(newUser.userEmail);
+        this.checkStringValue(newUser.userNickname);
+
+        const existingUser = await this.userDataFacade.getUserByEmail(newUser.userEmail);
+        if (existingUser || existingUser !== null) {
+            if (existingUser.userNickname !== newUser.userNickname){
+                existingUser.userNickname = newUser.userNickname;
+                await this.userDataFacade.updateUser(existingUser.userId, existingUser);
+            } else {
+                return existingUser;
+            }
+        } else {
+            await this.userDataFacade.createUser(newUser);
+        }
+
+        const createdUser = await this.userDataFacade.getUserByEmail(newUser.userEmail);
+        return createdUser;
     }
 
     updateUser = async (userId, updateUser) => {

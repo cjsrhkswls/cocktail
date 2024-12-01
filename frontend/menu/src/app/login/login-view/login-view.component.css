@@ -1,17 +1,4 @@
-/* Global body styling */
-.container {
-    background-color: #13294B;
-    font-family: 'Pixel', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    /*background-image: url('assets/snowflakes.gif');  Snowfall background */
-    background-size: cover;
-    animation: snowfall 1s infinite;
-  }
-  
+
   /* Container for the form */
   .form-container {
     display: flex;
@@ -120,12 +107,6 @@
     animation: shake 1s ease-in-out infinite;
   }
   
-  /* Snowfall animation */
-  @keyframes snowfall {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 100%; }
-  }
-  
   /* Bounce-in animation */
   @keyframes bounceIn {
     0% { transform: translateY(-100%); opacity: 0; }
@@ -140,124 +121,4 @@
     50% { transform: translateX(5px); }
     75% { transform: translateX(-5px); }
     100% { transform: translateX(0); }
-  }
-  
-
-  /* Snowflakes animation container */
-.snowflakes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Makes sure snowflakes don't interfere with page elements */
-  }
-  
-  /* Snowflake styling */
-  .snowflake {
-    position: absolute;
-    top: -10px; /* Start above the screen */
-    z-index: 9999;
-    font-size: 24px;
-    color: #fff;
-    user-select: none;
-    animation: fall linear infinite;
-    opacity: 0.8;
-  }
-  
-  /* Snowflake fall animation */
-  @keyframes fall {
-    0% {
-      transform: translateY(-10px) rotate(0deg); /* Starting point */
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(100vh) rotate(360deg); /* Ending point (falling to the bottom of the screen) */
-      opacity: 0.6;
-    }
-  }
-  
-  /* Randomly change snowflake speed and horizontal motion */
-  .snowflake:nth-child(1) {
-    animation-duration: 10s;
-    animation-delay: 0s;
-    left: 10%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(2) {
-    animation-duration: 12s;
-    animation-delay: 2s;
-    left: 20%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(3) {
-    animation-duration: 15s;
-    animation-delay: 1s;
-    left: 30%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(4) {
-    animation-duration: 8s;
-    animation-delay: 4s;
-    left: 40%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(5) {
-    animation-duration: 14s;
-    animation-delay: 0s;
-    left: 50%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(6) {
-    animation-duration: 16s;
-    animation-delay: 6s;
-    left: 60%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(7) {
-    animation-duration: 18s;
-    animation-delay: 5s;
-    left: 70%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(8) {
-    animation-duration: 20s;
-    animation-delay: 3s;
-    left: 80%;
-    animation-timing-function: linear;
-  }
-  
-  .snowflake:nth-child(9) {
-    animation-duration: 22s;
-    animation-delay: 7s;
-    left: 90%;
-    animation-timing-function: linear;
-  }
-  
-  /* Small snowflakes */
-  .snowflake-small {
-    font-size: 16px;
-    opacity: 0.9;
-  }
-  
-  /* Large snowflakes */
-  .snowflake-large {
-    font-size: 32px;
-    opacity: 0.7;
-  }
-  
-  /* Randomly change the size of each snowflake */
-  .snowflake:nth-child(even) {
-    font-size: 30px;
-  }
-  
-  .snowflake:nth-child(odd) {
-    font-size: 24px;
   }

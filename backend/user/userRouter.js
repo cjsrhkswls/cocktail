@@ -68,6 +68,19 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
+router.post('/login', async (req, res, next) => {
+    try {
+        const { userNickname, userEmail, userType } = req.body;
+        const newUser = await userService.login({userNickname, userEmail, userType});
+        return res.json(newUser);
+    } catch(err){
+        console.log(err);
+        const error = new Error(`Error on duplicate user email!!`);
+        error.status = 400;
+        return next(error);
+    }
+})
+
 router.put('/update/:id', async (req, res, next) => {
     const userId = req.params.id;
     try {

@@ -10,9 +10,15 @@ import { Menu } from './model/menu.js'
 import { User } from './model/user.js'
 import { Order } from './model/order.js'
 import errorHandler from './framework/errorHandler.js'
+import cors from 'cors'
 
 const PORT = process.env.PORT | 8080;
 const app = express();
+// CORS setting must be placed on the very top
+app.use(cors({
+  origin:[`${process.env.ANGULAR_ORIGIN1}`, `${process.env.ANGULAR_ORIGIN2}`]
+}));
+app.options('*', cors());
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -21,6 +27,7 @@ app.use('/api/order', order);
 app.use('/api/user', user);
 app.use('/api/script', script);
 app.use(errorHandler);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port:${PORT}`);

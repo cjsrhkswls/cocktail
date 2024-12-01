@@ -3,6 +3,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './model/user';
 import { Router } from '@angular/router';
 import { UserType } from './code';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +13,33 @@ export class AuthService {
   profile: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   private readonly USER_KEY = 'currentUserProfile';
   currentProfile = this.profile.asObservable();
+  apiBaseUrl = environment.backendAPIBase;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public httpClient:HttpClient) { }
 
   login(userData: User): void {
 
-    // TODO: Service call is required here
-    // TODO: place the below two lines in subscribe
-    this.profile.next(userData);
-    this.saveUser(userData);
-    //******************************** */
-    if (this.profile.getValue().userType === UserType.ADMIN) {
-      this.router.navigate(['/list']);
-    } else {
-      this.router.navigate(['/home']);
-    }
+    this.httpClient.post(this.apiBaseUrl + `/user/login`, userData).subscribe(
+        u => {
+          if (u){
+            this.profile.next(u);
+            this.saveUser(u);
+
+            if (this.profile.getValue().userType === UserType.ADMIN) {
+              this.router.navigate(['/list']);
+            } else {
+              this.router.navigate(['/home']);
+            }
+
+          }
+        },
+        error => {
+          console.log(error);
+        }
+    )
   }
 
-  private saveUser(cacheUser: User): void {
+  private saveUser(cacheUser: any): void {
     localStorage.setItem(this.USER_KEY, JSON.stringify(cacheUser));
   }
 
@@ -50,7 +61,7 @@ export class AuthService {
     
     const cacheUser = this.getUser();
     const currentUser = this.getCurrentUserProfile();
-    console.log(cacheUser, currentUser);
+    
     if (currentUser){
       return true;
     } else if(cacheUser) {

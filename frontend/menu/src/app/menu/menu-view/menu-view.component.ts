@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { Menu } from '../../model/menu';
 import { User } from '../../model/user';
 
@@ -14,5 +14,6 @@ export class MenuViewComponent {
   @Input() menu:Menu[] = [];
   @Input() currentUser:User | undefined;
 
-  constructor(){}
+  constructor(){
+  }
 }
