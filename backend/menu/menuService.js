@@ -1,10 +1,13 @@
 import { Service } from "../framework/service.js";
 import { MenuDataFacade } from "./menuDataFacade.js";
+import { OrderService } from "../order/orderService.js";
+import { OrderStatus } from "../code.js";
 
 export class MenuService extends Service {
     constructor() {
         super();
         this.menuDataFacade = new MenuDataFacade();
+        this.orderService = new OrderService();
     }
 
     getAllMenus = async () => {
@@ -36,6 +39,25 @@ export class MenuService extends Service {
         }
 
         return result;
+    }
+
+    getMenuAlive = async (userId) => {
+        this.checkId(userId);
+
+        try{
+            
+            const orderAlive = await this.orderService.getOrderByUserIdStatus(userId, OrderStatus.REQUESTED);
+            
+            if (orderAlive && orderAlive !== null) {
+                const menuAlive = await this.menuDataFacade.getMenuById(orderAlive.menuId);
+                return menuAlive;
+            }
+
+        } catch (err) {
+            console.log(`${userId} does not have an order in progress yet!!`);
+        }
+
+        return null;
     }
 
     createMenu = async (newMenu) => {

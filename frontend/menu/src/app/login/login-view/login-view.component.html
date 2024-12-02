@@ -1,43 +1,64 @@
-<div class="form-container">
-  <div class="card">
-    <div class="card-header">
-      <h1 class="title">🎄 2024 Christmas Cocktails 🎄</h1>
-      <p class="subtitle">Your drink menu is here!</p>
-    </div>
+<div class="snowflakescontainer">
 
-    <div class="card-content">
-      <form [formGroup]="userLoginForm" (ngSubmit)="emitLoginEvent()">
 
-        <!-- Nickname Input -->
-        <div class="form-field">
-          <label for="userNickname" class="label">🎅 Nickname</label>
-          <input id="userNickname" formControlName="userNickname" class="input" />
-          <div *ngIf="userLoginForm.get('userNickname')?.invalid && userLoginForm.get('userNickname')?.touched" class="error">
-            Nickname is required.
+  <!-- Snowflakes container -->
+  <div class="snowflakes">
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+    <div class="snowflake">&#10052;</div>
+  </div>
+
+
+
+  <div class="form-container">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="title">🎄 2024 Christmas Cocktails 🎄</h1>
+        <p class="subtitle">Your drink menu is here!</p>
+      </div>
+
+      <div class="card-content">
+        <form [formGroup]="userLoginForm" (ngSubmit)="emitLoginEvent()">
+
+          <!-- Nickname Input -->
+          <div class="form-field">
+            <label for="userNickname" class="label">🎅 Nickname</label>
+            <input id="userNickname" formControlName="userNickname" class="input" />
+            <div *ngIf="userLoginForm.get('userNickname')?.invalid && userLoginForm.get('userNickname')?.touched"
+              class="error">
+              Nickname is required.
+            </div>
           </div>
-        </div>
 
-        <!-- Email Input -->
-        <div class="form-field">
-          <label for="userEmail" class="label">🎁 Email</label>
-          <input id="userEmail" formControlName="userEmail" class="input" />
-          <div *ngIf="userLoginForm.get('userEmail')?.invalid && userLoginForm.get('userEmail')?.touched" class="error">
-            <p *ngIf="userLoginForm.get('userEmail')?.errors?.['required']">Email is required.</p>
-            <p *ngIf="userLoginForm.get('userEmail')?.errors?.['email']">Enter a valid email.</p>
+          <!-- Email Input -->
+          <div class="form-field">
+            <label for="userEmail" class="label">🎁 Email</label>
+            <input id="userEmail" formControlName="userEmail" class="input" />
+            <div *ngIf="userLoginForm.get('userEmail')?.invalid && userLoginForm.get('userEmail')?.touched"
+              class="error">
+              <p *ngIf="userLoginForm.get('userEmail')?.errors?.['required']">Email is required.</p>
+              <p *ngIf="userLoginForm.get('userEmail')?.errors?.['email']">Enter a valid email.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Submit Button -->
-        <div>
-          <button type="submit" class="submit-btn" [disabled]="userLoginForm.invalid">🎉 Login</button>
-        </div>
+          <!-- Submit Button -->
+          <div>
+            <button type="submit" class="submit-btn" [disabled]="userLoginForm.invalid">🎉 Login</button>
+          </div>
 
-      </form>
-    </div>
+        </form>
+      </div>
 
-    <!-- Footer with Christmas tree icon -->
-    <div class="card-footer">
-      <p class="footer-text">Merry Christmas and Happy Holidays!</p>
+      <!-- Footer with Christmas tree icon -->
+      <div class="card-footer">
+        <p class="footer-text">Merry Christmas and Happy Holidays!</p>
+      </div>
     </div>
   </div>
 </div>

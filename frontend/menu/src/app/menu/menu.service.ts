@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Menu } from '../model/menu';
-import { of } from 'rxjs';
 import { AlcoholLevel, MenuType } from '../code';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
 
-  menus:Menu[] = [
-    {menuId: 1, menuName: "Vodka Sunrise", menuType:MenuType.COCKTAIL, menuDescription: "Sweet and Sour", alcholLevel: AlcoholLevel.LOW},
-  ];
-
-  constructor() {
-  }
+  constructor(public httpClient:HttpClient){}
 
   getAllMenus(){
-    return of(this.menus);
+    return this.httpClient.get<Menu[]>(environment.backendAPIBase + "/menu/all");
+  }
+
+  getMenuAlive(userId: number){
+    return this.httpClient.get<Menu>(environment.backendAPIBase + `/menu/alive/userid/${userId}`);
   }
 }

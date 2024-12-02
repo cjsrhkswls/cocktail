@@ -42,6 +42,19 @@ router.get('/name/:name', async (req, res, next) => {
     }
 });
 
+router.get('/alive/userid/:id', async(req, res, next) => {
+    const userId = req.params.id;
+    try{
+        const menu = await menuService.getMenuAlive(userId);
+        return res.json(menu);
+    } catch(err) {
+        console.log(err);
+        const error = new Error(`Unexpected error while retrieving alive menu for ${userId}`);
+        error.status = 500;
+        return next(error);
+    }
+});
+
 router.post('/create', async (req, res, next) => {
     try{
         const { menuName, menuType, menuDescription, alcoholLevel } = req.body;

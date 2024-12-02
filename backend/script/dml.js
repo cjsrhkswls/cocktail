@@ -33,10 +33,82 @@ export const reset = (async () => {
                     {
                         menuName: 'Vodka Sunrise',
                         menuType: MenuType.COCKTAIL,
-                        menuDescription: 'Sweet, tangy, and citrusy, with a smooth kick of vodka. Perfect for sunny days or casual gatherings!',
+                        menuDescription: 'Sweet, tangy, and citrusy, with a smooth kick of vodka. Perfect for casual gatherings.',
                         alcoholLevel: AlcoholLevel.LOW
                     },
-                )
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Cosmopolitan',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Stylish, sweet-tart cocktail with vibrant pink hue and refreshing citrusy flavor',
+                        alcoholLevel: AlcoholLevel.MEDIUM
+                    },
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Balalaika',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Classic, refreshing cocktail offering a bright and citrusy flavor with a smooth finish',
+                        alcoholLevel: AlcoholLevel.HIGH
+                    },
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Japanese Slipper',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Vibrant, sweet, and tangy with a cherry garnish',
+                        alcoholLevel: AlcoholLevel.HIGH
+                    },
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Woo Woo',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Fruity and refreshing with sweet and tangy flavor',
+                        alcoholLevel: AlcoholLevel.LOW
+                    },
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Frankenstein',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Bold, spooky-themed drink with citrus flavor',
+                        alcoholLevel: AlcoholLevel.LOW
+                    },
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Christmas Special',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Secret',
+                        alcoholLevel: AlcoholLevel.MEDIUM
+                    },
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Vodka Bam',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Fizzy, sweet, and stimulating mix ideal for a lively night out',
+                        alcoholLevel: AlcoholLevel.HIGH
+                    },
+                );
+
+                Menu.create(
+                    {
+                        menuName: 'Peach Highball',
+                        menuType: MenuType.COCKTAIL,
+                        menuDescription: 'Light and refreshing, offering a sweet, fruity, and effervescent taste',
+                        alcoholLevel: AlcoholLevel.MEDIUM
+                    },
+                );
             }
         )
         .then(

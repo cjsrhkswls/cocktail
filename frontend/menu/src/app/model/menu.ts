@@ -3,5 +3,5 @@ export interface Menu {
     menuName: string,
     menuType: string,
     menuDescription: string,
-    alcholLevel: string,
+    alcoholLevel: string,
 }

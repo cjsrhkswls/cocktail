@@ -1,7 +1,25 @@
-<p>Menu!</p>
-<div>
-    {{menu[0].menuName}}
-</div>
-<div>
-    {{currentUser?.userNickname}}
+
+<div class="card-grid">
+  <div
+    *ngFor="let menuItem of menu"
+    class="menu-card-container"
+    (click)="onCardClick($event, menuItem)"
+  >
+    <div class="menu-card">
+      <div class="card-front">
+        <div class="card-header">
+          <h3>{{ menuItem.menuName }}</h3>
+        </div>
+        <div class="card-content">
+          <p>Alcohol degree: {{ menuItem.alcoholLevel }}</p>
+        </div>
+      </div>
+      <div class="card-back">
+        <p>{{ menuItem.menuDescription }}</p>
+        <div>
+          <button class="order-btn" (click)="order($event,menuItem)">🎉 Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

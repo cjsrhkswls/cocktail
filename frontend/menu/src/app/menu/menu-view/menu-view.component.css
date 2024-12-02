@@ -1,0 +1,135 @@
+/* app.component.css */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(30%, 1fr));
+  /* Automatically adjust column width */
+  gap: 5%;
+  /* Even spacing between the cards */
+  padding: 5%;
+  border-radius: 10px;
+  justify-items: center;
+  /* Centers items horizontally within each grid cell */
+}
+
+.menu-card-container {
+  width: 100%;
+  /* Adjust width to fit the container */
+  height: 100%;
+  /* Ensure the container takes full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15%;
+}
+
+.menu-card {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(45deg, #ff5959, #56c3a5);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+  cursor: pointer;
+  width: 85%;
+  /* Make sure the card takes full width of the container */
+  height: 85%;
+  /* Ensure the card's height fits the container */
+}
+
+.menu-card.focused {
+  transform: rotateY(180deg);
+  /* Flip the card when it's focused */
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  backface-visibility: hidden;
+  /* Hide the back face when flipped */
+  border-radius: 10px;
+  width: 100%;
+  /* Ensure front and back are full size of the card */
+  height: 100%;
+  /* Ensure front and back are full size of the card */
+}
+
+.card-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.card-back {
+  background: linear-gradient(45deg, #ff5959, #56c3a5);
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Christmas red */
+  color: rgba(4, 12, 7, 0.992);
+  text-align: center;
+  padding: 20px;
+  transform: rotateY(180deg);
+  /* Initially hide the back face */
+}
+
+.card-header {
+  background-color: #ff4b5c;
+  /* Christmas red */
+  color: white;
+  text-align: center;
+  padding: 1%;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.card-content {
+  padding: 2%;
+  text-align: center;
+  color: #440404;
+  font-size: 1.1em;
+}
+
+.card-back p {
+  font-size: 1em;
+  color: white;
+  align-items: center;
+}
+
+.order-btn {
+  width: 90%;
+  font-family: 'Pixel', sans-serif;
+  font-size: 15px;
+  padding: 4%;
+  background-color: #ff6f61;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.order-btn:hover {
+  transform: scale(1.05);
+  background-color: #ff3b30;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    /* Adjust column width on tablet */
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    /* 1 column on mobile */
+  }
+}

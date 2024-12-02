@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { UserType } from './code';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { SnackbarComponent } from './common/snackbar/snackbar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from './common/snackbar/snackbar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,27 +18,28 @@ export class AuthService {
   currentProfile = this.profile.asObservable();
   apiBaseUrl = environment.backendAPIBase;
 
-  constructor(public router: Router, public httpClient:HttpClient) { }
+  constructor(public router: Router, public httpClient: HttpClient, public snackbarService: SnackbarService) { }
 
   login(userData: User): void {
 
     this.httpClient.post(this.apiBaseUrl + `/user/login`, userData).subscribe(
-        u => {
-          if (u){
-            this.profile.next(u);
-            this.saveUser(u);
+      u => {
+        if (u) {
+          this.profile.next(u);
+          this.saveUser(u);
 
-            if (this.profile.getValue().userType === UserType.ADMIN) {
-              this.router.navigate(['/list']);
-            } else {
-              this.router.navigate(['/home']);
-            }
-
+          if (this.profile.getValue().userType === UserType.ADMIN) {
+            this.router.navigate(['/list']);
+          } else {
+            this.router.navigate(['/home']);
           }
-        },
-        error => {
-          console.log(error);
+
         }
+      },
+      error => {
+        console.log(error);
+        this.snackbarService.notifyError(error.message);
+      }
     )
   }
 
@@ -58,17 +62,17 @@ export class AuthService {
   }
 
   isLoggedin() {
-    
+
     const cacheUser = this.getUser();
     const currentUser = this.getCurrentUserProfile();
-    
-    if (currentUser){
+
+    if (currentUser) {
       return true;
-    } else if(cacheUser) {
-        this.profile.next(cacheUser);
-        return true;
+    } else if (cacheUser) {
+      this.profile.next(cacheUser);
+      return true;
     } else {
-        return false;
+      return false;
     }
   }
 

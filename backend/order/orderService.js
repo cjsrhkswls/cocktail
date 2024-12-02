@@ -1,7 +1,7 @@
 import { Service } from "../framework/service.js";
 import { OrderDataFacade } from "./orderDataFacade.js";
-import { UserService } from "../user/userService.js";
-import { MenuService } from "../menu/menuService.js";
+import { UserDataFacade } from "../user/userDataFacade.js";
+import { MenuDataFacade } from "../menu/menuDataFacade.js";
 import { OrderStatus, UserType } from "../code.js"
 import { EmailService } from "../framework/emailService.js";
 
@@ -9,8 +9,8 @@ export class OrderService extends Service{
     constructor(){
         super();
         this.orderDataFacade = new OrderDataFacade();
-        this.userService = new UserService();
-        this.menuService = new MenuService();
+        this.userDataFacade = new UserDataFacade();
+        this.menuDataFacade = new MenuDataFacade();
         this.emailService = new EmailService();
     }
 
@@ -82,13 +82,13 @@ export class OrderService extends Service{
     createOrder = async (userId, menuId) => {
         this.checkId(userId);
         this.checkId(menuId);
-        const aUser = await this.userService.getUserById(userId);
+        const aUser = await this.userDataFacade.getUserById(userId);
 
         if (!aUser || aUser === null){
             this.throwError(`The user:${userId} that request the order does not exist!!`);
         }
 
-        const aMenu = await this.menuService.getMenuById(menuId);
+        const aMenu = await this.menuDataFacade.getMenuById(menuId);
         if (!aMenu || aMenu === null){
             this.throwError(`The menu:${menuId} that is requested does not exist!!`);
         }
@@ -114,7 +114,7 @@ export class OrderService extends Service{
         this.checkId(userId);
         this.checkStringValue(newStatus);
 
-        const aRequester = await this.userService.getUserById(userId);
+        const aRequester = await this.userDataFacade.getUserById(userId);
         console.log(aRequester);
         if (!aRequester || aRequester === null) {
             this.throwError(`The user:${userId} who is trying to update does not exist!!`);
@@ -137,8 +137,8 @@ export class OrderService extends Service{
         } else {
             console.log(`Order:${newStatus} updated`);
             const updatedOrder = await this.orderDataFacade.getOrderById(orderId);
-            const aUser = await this.userService.getUserById(updatedOrder.userId);
-            const aMenu = await this.menuService.getMenuById(updatedOrder.menuId);
+            const aUser = await this.userDataFacade.getUserById(updatedOrder.userId);
+            const aMenu = await this.menuDataFacade.getMenuById(updatedOrder.menuId);
             this.emailService.sendMailToUserForOrderUpdate(updatedOrder, aMenu, aUser);
 
             if (aRequester.userType !== UserType.ADMIN){

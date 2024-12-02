@@ -1,4 +1,19 @@
-<app-menu-view
-[menu]="menu"
-[currentUser]="currentUser"
-></app-menu-view>
+<div class="snowflakescontainer">
+
+
+    <!-- Snowflakes container -->
+    <div class="snowflakes">
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+    </div>
+    <app-menu-alive-view [menuAlive]="menuAlive">
+    </app-menu-alive-view>
+    <app-menu-view [menu]="menu" [currentUser]="currentUser"></app-menu-view>
+</div>

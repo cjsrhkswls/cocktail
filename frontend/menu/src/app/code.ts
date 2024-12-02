@@ -22,3 +22,8 @@ export abstract class OrderStatus {
     static readonly CANCELED = "Cancelled";
     static readonly COMPLETED = "Completed";
 }
+
+export abstract class MessageType {
+    static readonly ERROR = "Error";
+    static readonly INFO = "Info";
+}

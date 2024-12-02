@@ -1,0 +1,29 @@
+.custom-snackbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .snackbar-message {
+    font-size: 16px;
+    padding: 5px 5px;
+  }
+  
+  .close-button {
+    color: #fff;
+    background-color: #f44336; /* Red color for close button */
+    padding: 7px 7px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    background-color: #230606; /* Darker red on hover */
+  }
