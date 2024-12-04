@@ -55,6 +55,20 @@ router.get('/alive/userid/:id', async(req, res, next) => {
     }
 });
 
+router.get('/order/:userid/:menuid', async(req, res, next) => {
+    const userId = req.params.userid;
+    const menuId = req.params.menuid;
+    try{
+        const menu = await menuService.getMenuWithOrder(userId, menuId);
+        return res.json(menu);
+    } catch(err) {
+        console.log(err);
+        const error = new Error(`Unexpected error while retrieving menu with order for ${userId}`);
+        error.status = 500;
+        return next(error);
+    }
+});
+
 router.post('/create', async (req, res, next) => {
     try{
         const { menuName, menuType, menuDescription, alcoholLevel } = req.body;

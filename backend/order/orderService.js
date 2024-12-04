@@ -4,6 +4,8 @@ import { UserDataFacade } from "../user/userDataFacade.js";
 import { MenuDataFacade } from "../menu/menuDataFacade.js";
 import { OrderStatus, UserType } from "../code.js"
 import { EmailService } from "../framework/emailService.js";
+import { Info } from "../model/info.js";
+import { MenuWithOrder } from "../model/menuWithOrder.js";
 
 export class OrderService extends Service {
     constructor() {
@@ -21,6 +23,25 @@ export class OrderService extends Service {
         }
         return result;
     };
+
+    getAllInfo = async () => {
+        const allOrders = await this.getAllOrders();
+
+        let result = [];
+
+        for (const order of allOrders){
+            try {
+                const user = await this.userDataFacade.getUserById(order.userId);
+                const menu = await this.menuDataFacade.getMenuById(order.menuId);
+                const info = new Info(order, user, menu);
+                result.push(info);
+            } catch (error) {
+                console.log("getAllInfo: Unexpected error while retrieving all info", error);
+            }
+        }
+
+        return result;
+    }
 
     getOrderById = async (orderId) => {
         this.checkId(orderId);
@@ -65,6 +86,17 @@ export class OrderService extends Service {
         return result;
     }
 
+    getOrderByUserIdMenuId = async (userId, menuId) => {
+        this.checkId(userId);
+        this.checkId(menuId);
+        const result = await this.orderDataFacade.getOrderByUserIdMenuId(userId, menuId);
+        if (!result || result === null) {
+            this.throwError(`No order for user Id:${userId}, menu Id:${menuId}`);
+        }
+
+        return result;
+    }
+
     getOrderByUserIdMenuIdStatus = async (userId, menuId, status) => {
         this.checkId(userId);
         this.checkId(menuId);
@@ -73,7 +105,7 @@ export class OrderService extends Service {
         const result = await this.orderDataFacade.getOrderByUserIdMenuIdStatus(userId, menuId, status);
 
         if (!result || result === null) {
-            this.throwError(`No order for order Id:${orderId}, menu Id:${menuId}, order status:${status}`);
+            this.throwError(`No order for user Id:${userId}, menu Id:${menuId}, order status:${status}`);
         }
 
         return result;
@@ -128,7 +160,9 @@ export class OrderService extends Service {
         if (!orderedMenu || orderedMenu === null) {
             this.throwError(`The ordered menu does not exist, menuId: ${newOrder.menuId}, userId: ${userId}`)
         }
-        return orderedMenu;
+
+        const menuWithOrder = new MenuWithOrder(orderedMenu, newOrder.orderId, newOrder.orderStatus);
+        return menuWithOrder;
     }
 
     cancelOrder = async (userId, menuId) => {
@@ -136,6 +170,28 @@ export class OrderService extends Service {
 
         if (orderedMenu && orderedMenu !== null) {
             const updatedOrder = await this.updateOrder(userId, orderedMenu.orderId, OrderStatus.CANCELED);
+            return updatedOrder;
+        } else {
+            return null;
+        }
+    }
+
+    rejectOrder = async (userId, orderId) => {
+        const orderedMenu = await this.getOrderById(orderId);
+
+        if (orderedMenu && orderedMenu !== null) {
+            const updatedOrder = await this.updateOrder(userId, orderedMenu.orderId, OrderStatus.REJECTED);
+            return updatedOrder;
+        } else {
+            return null;
+        }
+    }
+
+    completeOrder = async (userId, orderId) => {
+        const orderedMenu = await this.getOrderById(orderId);
+
+        if (orderedMenu && orderedMenu !== null) {
+            const updatedOrder = await this.updateOrder(userId, orderedMenu.orderId, OrderStatus.COMPLETED);
             return updatedOrder;
         } else {
             return null;
@@ -157,10 +213,6 @@ export class OrderService extends Service {
 
         if (!existingOrder || existingOrder === null) {
             this.throwError(`The order to be updated does not exist: ${orderId}!!`);
-        }
-
-        if (aRequester.userType !== UserType.ADMIN && aRequester.userId !== existingOrder.userId) {
-            this.throwError(`The user:${userId} does not own this order:${existingOrder.orderId}!!`);
         }
 
         const updatedRows = await this.orderDataFacade.updateOrder(orderId, newStatus);

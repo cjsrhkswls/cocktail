@@ -42,6 +42,18 @@ export class OrderDataFacade {
         )
     };
 
+    getOrderByUserIdMenuId = async (userId, menuId) => {
+        return await Order.findOne(
+            {
+                where: {
+                    userId: userId,
+                    menuId: menuId
+                },
+                order: [['createdAt', 'DESC']]
+            }
+        )
+    };
+
     getOrderByUserIdMenuIdStatus = async (userId, menuId, status) => {
         return await Order.findOne(
             {
