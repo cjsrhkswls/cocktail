@@ -26,7 +26,11 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  background: linear-gradient(45deg, #ff5959, #56c3a5);
+  background: linear-gradient(45deg, rgba(255, 89, 89, 0.8), rgba(86, 195, 165, 0.8));
+  /* Combine gradient with the background image */
+  background-size: cover; /* Ensure the background covers the entire card */
+  background-position: center; /* Center the background */
+  background-repeat: no-repeat; /* Prevent repeating the background */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform-style: preserve-3d;
@@ -63,10 +67,10 @@
 }
 
 .card-back {
-  background: linear-gradient(45deg, #ff5959, #56c3a5);
+  background: linear-gradient(45deg, rgba(255, 89, 89, 0.8), rgba(86, 195, 165, 0.8));
+  /* Christmas gradient background for the back */
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  /* Christmas red */
   color: rgba(4, 12, 7, 0.992);
   text-align: center;
   padding: 20px;
@@ -75,7 +79,7 @@
 }
 
 .card-header {
-  background-color: #ff4b5c;
+  background: linear-gradient(45deg, rgba(86, 195, 165, 0.8), rgba(255, 89, 89, 0.8));
   /* Christmas red */
   color: white;
   text-align: center;
@@ -105,7 +109,7 @@
   font-family: 'Pixel', sans-serif;
   font-size: 15px;
   padding: 4%;
-  background-color: #ff6f61;
+  background: linear-gradient(45deg, rgba(86, 195, 165, 0.8), rgba(255, 89, 89, 0.8));
   color: white;
   border-radius: 5px;
   border: none;

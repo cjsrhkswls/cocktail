@@ -3,7 +3,7 @@
   <div
     *ngFor="let menuItem of menu"
     class="menu-card-container"
-    (click)="onCardClick($event, menuItem)"
+    (click)="onCardClick($event)"
   >
     <div class="menu-card">
       <div class="card-front">
@@ -17,7 +17,7 @@
       <div class="card-back">
         <p>{{ menuItem.menuDescription }}</p>
         <div>
-          <button class="order-btn" (click)="order($event,menuItem)">🎉 Order</button>
+          <button class="order-btn" (click)="order(menuItem)">🎉 Order</button>
         </div>
       </div>
     </div>

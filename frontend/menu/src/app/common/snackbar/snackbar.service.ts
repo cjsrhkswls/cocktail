@@ -10,14 +10,13 @@ export class SnackbarService {
 
   constructor(public snackBar:MatSnackBar, public ngZone: NgZone) { }
 
-  notifyError(message: any){
+  notifyMessage(message: any){
     this.ngZone.run(() => {
       this.snackBar.openFromComponent(SnackbarComponent, {
         data: {
           message: message,
-          type: MessageType.ERROR
         },
-        duration: 10000,
+        duration: 8000,
         horizontalPosition: 'center',
         verticalPosition: 'top'
       });

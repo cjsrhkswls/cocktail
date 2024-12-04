@@ -82,6 +82,42 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
+router.post('/new', async(req, res, next) => {
+    try{
+        const {userId, menuId} = req.body;
+        const orderedMenu = await orderService.createNewOrder(userId, menuId);
+        return res.json(orderedMenu);
+    } catch(err){
+        console.log(err);
+        const error = new Error(`Unexpected error while requesting new order`);
+        error.status = 400;
+        return next(error);
+    }
+});
+
+router.get('/watch/:userid', async(req, res) => {
+
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    const userId = req.params.userid;
+    let i = 1;
+    const intervalId = setInterval(async () => {
+        
+        console.log(`SSE Connection alive for the user: ${userId}, for ${i}`);
+        const menuAlive = await orderService.getMenuOfActiveOrder(userId);
+        res.write(`${JSON.stringify(menuAlive)}`);
+
+        i++;
+    }, 10000);
+
+    req.on('close', () => {
+        clearInterval(intervalId);
+        res.end();
+    });
+})
+
 router.put('/update/:id/status/:status/user/:userid', async(req, res, next) => {
     const orderId = req.params.id;
     const status = req.params.status;
@@ -96,6 +132,19 @@ router.put('/update/:id/status/:status/user/:userid', async(req, res, next) => {
         return next(error);
     }
 });
+
+router.put('/cancel', async(req, res, next) => {
+    try{
+        const {userId, menuId} = req.body;
+        const orderedMenu = await orderService.cancelOrder(userId, menuId);
+        return res.json(orderedMenu);
+    } catch(err){
+        console.log(err);
+        const error = new Error(`Unexpected error while canceling active order`);
+        error.status = 400;
+        return next(error);
+    }
+})
 
 router.delete('/delete/:id', async (req, res, next) => {
     const orderId = req.params.id;

@@ -13,7 +13,9 @@
       <div class="snowflake">&#10052;</div>
       <div class="snowflake">&#10052;</div>
     </div>
-    <app-menu-alive-view [menuAlive]="menuAlive">
-    </app-menu-alive-view>
-    <app-menu-view [menu]="menu" [currentUser]="currentUser"></app-menu-view>
+    <div class="content-container">
+      <app-menu-alive-view [menuAlive]="menuAlive" (cancelEvent)="cancelOrder($event)">
+      </app-menu-alive-view>
+      <app-menu-view [menu]="menu" [currentUser]="currentUser" (orderEvent)="orderMenu($event)"></app-menu-view>
+    </div>
 </div>

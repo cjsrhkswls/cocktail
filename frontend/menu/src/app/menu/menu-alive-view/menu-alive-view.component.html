@@ -1,1 +1,8 @@
-{{menuAlive.menuId}}
+<div class="menu-bar-container" *ngIf="menuAlive.menuId > 0">
+    <div class="christmas-container">
+        <div class="christmas-loading-bar" [style.width.%]="progress">
+            <span class="menu-name">{{ menuAlive.menuName }}</span>
+            <button class="toggle-btn" (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

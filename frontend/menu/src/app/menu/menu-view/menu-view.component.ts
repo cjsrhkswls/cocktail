@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { Menu } from '../../model/menu';
 import { User } from '../../model/user';
 
@@ -15,11 +15,13 @@ export class MenuViewComponent {
 
   @Input() menu:Menu[] = [];
   @Input() currentUser:User | undefined;
+
+  @Output() orderEvent = new EventEmitter<number>();
  
   constructor(){
   }
 
-  onCardClick(event: MouseEvent, menuItem: Menu): void {
+  onCardClick(event: MouseEvent): void {
     const card = event.target as HTMLElement;
     const cardElement = card.closest('.menu-card') as HTMLElement;
 
@@ -28,7 +30,7 @@ export class MenuViewComponent {
     }
   }
 
-  order(event: MouseEvent, menuItem: Menu){
-    console.log(menuItem.menuName);
+  order(menuItem: Menu){
+    this.orderEvent.emit(menuItem.menuId);
   }
 }

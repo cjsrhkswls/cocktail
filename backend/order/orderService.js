@@ -5,8 +5,8 @@ import { MenuDataFacade } from "../menu/menuDataFacade.js";
 import { OrderStatus, UserType } from "../code.js"
 import { EmailService } from "../framework/emailService.js";
 
-export class OrderService extends Service{
-    constructor(){
+export class OrderService extends Service {
+    constructor() {
         super();
         this.orderDataFacade = new OrderDataFacade();
         this.userDataFacade = new UserDataFacade();
@@ -14,7 +14,7 @@ export class OrderService extends Service{
         this.emailService = new EmailService();
     }
 
-    getAllOrders = async () =>{
+    getAllOrders = async () => {
         const result = await this.orderDataFacade.getAllOrders();
         if (result.length < 1) {
             this.throwError('There is no order yet!!');
@@ -65,7 +65,7 @@ export class OrderService extends Service{
         return result;
     }
 
-    getOrderByUserIdMenuIdStatus = async (userId, menuId, status) =>{
+    getOrderByUserIdMenuIdStatus = async (userId, menuId, status) => {
         this.checkId(userId);
         this.checkId(menuId);
         this.checkStringValue(status);
@@ -79,17 +79,30 @@ export class OrderService extends Service{
         return result;
     }
 
+    getMenuOfActiveOrder = async (userId) => {
+        this.checkId(userId);
+
+        const activeOrder = await this.getOrderByUserIdStatus(userId, OrderStatus.REQUESTED);
+
+        if (!activeOrder || activeOrder === null) {
+            console.log(`No active order for the user: ${userId}`);
+            return null;
+        } else {
+            return activeOrder;
+        }
+    }
+
     createOrder = async (userId, menuId) => {
         this.checkId(userId);
         this.checkId(menuId);
         const aUser = await this.userDataFacade.getUserById(userId);
 
-        if (!aUser || aUser === null){
+        if (!aUser || aUser === null) {
             this.throwError(`The user:${userId} that request the order does not exist!!`);
         }
 
         const aMenu = await this.menuDataFacade.getMenuById(menuId);
-        if (!aMenu || aMenu === null){
+        if (!aMenu || aMenu === null) {
             this.throwError(`The menu:${menuId} that is requested does not exist!!`);
         }
 
@@ -104,9 +117,29 @@ export class OrderService extends Service{
         const newOrder = await this.orderDataFacade.getOrderByUserIdMenuIdStatus(userId, menuId, OrderStatus.REQUESTED);
 
         this.emailService.sendMailToOwnerForNewOrder(newOrder, aMenu, aUser);
-        this.emailService.sendMailToUserForNewOrder(newOrder, aMenu, aUser);
 
         return newOrder;
+    }
+
+    createNewOrder = async (userId, menuId) => {
+        const newOrder = await this.createOrder(userId, menuId);
+        const orderedMenu = await this.menuDataFacade.getMenuById(newOrder.menuId);
+
+        if (!orderedMenu || orderedMenu === null) {
+            this.throwError(`The ordered menu does not exist, menuId: ${newOrder.menuId}, userId: ${userId}`)
+        }
+        return orderedMenu;
+    }
+
+    cancelOrder = async (userId, menuId) => {
+        const orderedMenu = await this.getOrderByUserIdMenuIdStatus(userId, menuId, OrderStatus.REQUESTED);
+
+        if (orderedMenu && orderedMenu !== null) {
+            const updatedOrder = await this.updateOrder(userId, orderedMenu.orderId, OrderStatus.CANCELED);
+            return updatedOrder;
+        } else {
+            return null;
+        }
     }
 
     updateOrder = async (userId, orderId, newStatus) => {
@@ -126,7 +159,7 @@ export class OrderService extends Service{
             this.throwError(`The order to be updated does not exist: ${orderId}!!`);
         }
 
-        if (aRequester.userType !== UserType.ADMIN && aRequester.userId !== existingOrder.userId){
+        if (aRequester.userType !== UserType.ADMIN && aRequester.userId !== existingOrder.userId) {
             this.throwError(`The user:${userId} does not own this order:${existingOrder.orderId}!!`);
         }
 
@@ -139,9 +172,12 @@ export class OrderService extends Service{
             const updatedOrder = await this.orderDataFacade.getOrderById(orderId);
             const aUser = await this.userDataFacade.getUserById(updatedOrder.userId);
             const aMenu = await this.menuDataFacade.getMenuById(updatedOrder.menuId);
-            this.emailService.sendMailToUserForOrderUpdate(updatedOrder, aMenu, aUser);
 
-            if (aRequester.userType !== UserType.ADMIN){
+            if (newStatus == OrderStatus.COMPLETED || newStatus == OrderStatus.REJECTED){
+                this.emailService.sendMailToUserForOrderUpdate(updatedOrder, aMenu, aUser);
+            }
+
+            if (aRequester.userType !== UserType.ADMIN) {
                 this.emailService.sendMailToOwnerForOrderUpdate(updatedOrder, aMenu, aUser);
             }
             return updatedOrder;

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Menu } from '../model/menu';
-import { AlcoholLevel, MenuType } from '../code';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -17,5 +16,13 @@ export class MenuService {
 
   getMenuAlive(userId: number){
     return this.httpClient.get<Menu>(environment.backendAPIBase + `/menu/alive/userid/${userId}`);
+  }
+
+  orderMenu(userId:number, menuId:number){
+    return this.httpClient.post<Menu>(environment.backendAPIBase + '/order/new', {userId:userId, menuId: menuId});
+  }
+
+  cancelOrder(userId: number, menuId: number){
+    return this.httpClient.put<Menu>(environment.backendAPIBase + `/order/cancel`, {userId: userId, menuId: menuId});
   }
 }

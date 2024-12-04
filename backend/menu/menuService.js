@@ -35,7 +35,7 @@ export class MenuService extends Service {
         const result = await this.menuDataFacade.getMenuByName(menuName);
 
         if (!result || result === null) {
-            this.throwError(`No menu item for menu name:${menuName}`);
+            this.throwError(`getMenuByName: No menu item for menu name:${menuName}`);
         }
 
         return result;
@@ -54,7 +54,7 @@ export class MenuService extends Service {
             }
 
         } catch (err) {
-            console.log(`${userId} does not have an order in progress yet!!`);
+            console.log(`getMenuAlive: ${userId} does not have an order in progress yet!!`);
         }
 
         return null;
