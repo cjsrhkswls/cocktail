@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { UserType } from './code';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { SnackbarComponent } from './common/snackbar/snackbar.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarService } from './common/snackbar/snackbar.service';
 
 @Injectable({

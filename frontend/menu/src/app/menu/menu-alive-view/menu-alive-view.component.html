@@ -1,7 +1,7 @@
-<div class="menu-bar-container" *ngIf="menuAlive.menuId > 0">
+<div class="menu-bar-container" *ngIf="menuAlive.menu.menuId > 0">
     <div class="christmas-container">
         <div class="christmas-loading-bar" [style.width.%]="progress">
-            <span class="menu-name">{{ menuAlive.menuName }}</span>
+            <span class="menu-name">{{ menuAlive.menu.menuName }}</span>
             <button class="toggle-btn" (click)="cancel()">Cancel</button>
         </div>
     </div>

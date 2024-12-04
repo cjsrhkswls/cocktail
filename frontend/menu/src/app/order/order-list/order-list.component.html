@@ -1,1 +1,19 @@
-<p>order-list works!</p>
+<div class="snowflakescontainer">
+    <!-- Snowflakes container -->
+    <div class="snowflakes">
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+      <div class="snowflake">&#10052;</div>
+    </div>
+<app-order-list-view
+[orders]="allOrderInfo"
+(completeEvent)="completeOrder($event)"
+(rejectEvent)="rejectOrder($event)"
+></app-order-list-view>
+</div>

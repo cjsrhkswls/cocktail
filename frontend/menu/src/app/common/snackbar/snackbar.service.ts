@@ -22,4 +22,17 @@ export class SnackbarService {
       });
     });
   }
+
+  notifyMessageWithSecs(message: any, secs: number){
+    this.ngZone.run(() => {
+      this.snackBar.openFromComponent(SnackbarComponent, {
+        data: {
+          message: message,
+        },
+        duration: secs * 1000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
+    });
+  }
 }

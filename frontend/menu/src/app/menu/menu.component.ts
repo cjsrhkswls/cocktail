@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Menu } from '../model/menu';
+import { Component, OnInit } from '@angular/core';
+import { Menu, MenuWithOrder } from '../model/menu';
 import { MenuService } from './menu.service';
 import { MenuViewComponent } from "./menu-view/menu-view.component";
 import { AuthService } from '../auth.service';
@@ -8,7 +8,7 @@ import { MenuAliveViewComponent } from "./menu-alive-view/menu-alive-view.compon
 import { Router } from '@angular/router';
 import { SnackbarService } from '../common/snackbar/snackbar.service';
 import { switchMap, interval, Observable, catchError, of } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { OrderStatus } from '../code';
 
 @Component({
   selector: 'app-menu',
@@ -17,42 +17,53 @@ import { environment } from '../../environments/environment';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnInit, OnDestroy {
+export class MenuComponent implements OnInit{
   currentUser!: User;
   menu!: Menu[];
 
-  menuAlive: Menu = {
-    menuId: -1,
-    menuName: '',
-    menuType: '',
-    menuDescription: '',
-    alcoholLevel: ''
+  menuAlive: MenuWithOrder = {
+    menu:{
+      menuId: -1,
+      menuName: '',
+      menuType: '',
+      menuDescription: '',
+      alcoholLevel: '',
+    },
+    orderId: -1,
+    orderStatus: '',
   };
 
-  tempMenu: Menu = {
-    menuId: -1,
-    menuName: '',
-    menuType: '',
-    menuDescription: '',
-    alcoholLevel: ''
+  tempMenu: MenuWithOrder = {
+    menu:{
+      menuId: -1,
+      menuName: '',
+      menuType: '',
+      menuDescription: '',
+      alcoholLevel: '',
+    },
+    orderId: -1,
+    orderStatus: '',
   };
 
   constructor(private readonly router: Router, public menuService: MenuService, public authService: AuthService, public snackbarService: SnackbarService) { }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
 
   ngOnInit() {
     this.authService.getUserProfile().subscribe(
       u => {
         if (u) {
+
           this.currentUser = u;
-          this.fetchMenuAliveDataRepeatedly(this.currentUser.userId).subscribe(m => {
-            console.log(m);
-            if (m) {
-              this.menuAlive = m;
+          
+          this.menuService.getMenuAlive(this.currentUser.userId).subscribe(m => {
+            if(m){
+              if (m.orderStatus === OrderStatus.REQUESTED){
+                this.menuAlive = m;
+              }
             }
-          })
+          });
+
+          this.startFetchingMenuAliveData(this.currentUser.userId);
+
         } else {
           this.router.navigate(['/login']);
         }
@@ -64,67 +75,73 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
-  fetchMenuAliveData(userId:number): Observable<any> {
-    return this.menuService.getMenuAlive(userId);
+  startFetchingMenuAliveData(userId:number){
+    this.fetchMenuAliveDataRepeatedly(userId).subscribe(mWo => {
+      if(mWo && mWo.menu.menuId > 0){
+        if(mWo.orderStatus === OrderStatus.REQUESTED){
+          this.menuAlive = mWo;
+        } else {
+          // TODO: Push alarm has to be implemented here.
+          this.snackbarService.notifyMessageWithSecs(`Your order:${this.menuAlive.menu.menuName} has been ${mWo.orderStatus}`, 30);
+          this.menuAlive = this.tempMenu;
+        }
+      } else {
+        this.menuAlive = this.tempMenu;
+      }
+    })
   }
 
-  fetchMenuAliveDataRepeatedly(userId:number): Observable<any> {
-    this.fetchMenuAliveData(userId).subscribe(m => {
-      if(m){
-        this.menuAlive = m;
-      }
-    });
+  fetchMenuAliveData(userId:number): Observable<MenuWithOrder> {
+    console.log("Try to fetch the menu alive data");
+    if (this.menuAlive.menu.menuId > 0) {
+      return this.menuService.getMenuWithOrder(userId, this.menuAlive.menu.menuId);
+    } else {
+      return of(this.menuAlive);
+    }
+  }
 
-    return interval(120000).pipe( // 100 seconds interval (100,000 ms)
+  fetchMenuAliveDataRepeatedly(userId:number): Observable<MenuWithOrder> {
+    return interval(60000).pipe(
       switchMap(() =>
         this.fetchMenuAliveData(userId).pipe(
           catchError((error) => {
             console.error('Error fetching data:', error);
-            return of({ error: true, message: 'Failed to fetch data' });
+            return of(this.tempMenu);
           })
         )
       )
     );
   }
 
-  mapToMenu(data: any) {
-    return {
-      menuId: data.menuId ?? -1,
-      menuName: data.menuName ?? '',
-      menuType: data.menuType ?? '',
-      menuDescription: data.menuDescription ?? '',
-      alcoholLevel: data.alcoholLevel ?? ''
-    }
-  }
-
   orderMenu(menuId: number) {
-    if (this.menuAlive.menuId < 0) {
+    if (this.menuAlive.menu.menuId < 0) {
       this.menuService.orderMenu(this.currentUser.userId, menuId).subscribe(m => {
+        console.log(m);
         if (m) {
           this.menuAlive = m;
-          this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menuName} is requested!`);
+          this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menu.menuName} is requested!`);
         }
       },
         error => {
           console.log(error);
-          this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menuName} is already in progress!`);
+          this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menu.menuName} is already in progress!`);
         }
       );
     } else {
-      this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menuName} is already in progress!`);
+      this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menu.menuName} is already in progress!`);
     }
   }
 
   cancelOrder(menuId: number){
     this.menuService.cancelOrder(this.currentUser.userId, menuId)
     .pipe(catchError(error => {
-      this.snackbarService.notifyMessage(`Fail to cancel your order: ${this.menuAlive.menuName}!`);
+      this.snackbarService.notifyMessage(`Fail to cancel your order: ${this.menuAlive.menu.menuName}!`);
       return of(undefined);
     }))
     .subscribe(
       m => {
         if (m) {
-          this.snackbarService.notifyMessage(`Your order: ${m.menuName} has been cancelled!`);
+          this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menu.menuName} has been cancelled!`);
           this.menuAlive = this.tempMenu;
         }
       }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Menu } from '../../model/menu';
+import { MenuWithOrder } from '../../model/menu';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,12 +10,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './menu-alive-view.component.css'
 })
 export class MenuAliveViewComponent {
-  @Input() menuAlive: Menu = {
-    menuId: -1,
-    menuName: '',
-    menuType: '',
-    menuDescription: '',
-    alcoholLevel: ''
+  @Input() menuAlive: MenuWithOrder = {
+    menu:{
+      menuId: -1,
+      menuName: '',
+      menuType: '',
+      menuDescription: '',
+      alcoholLevel: '',
+    },
+    orderId: -1,
+    orderStatus: '',
   };
 
   @Output() cancelEvent = new EventEmitter<number>();
@@ -40,6 +44,6 @@ export class MenuAliveViewComponent {
 
   cancel(): void {
     this.isCancelled = true;
-    this.cancelEvent.emit(this.menuAlive.menuId);
+    this.cancelEvent.emit(this.menuAlive.menu.menuId);
   }
 }

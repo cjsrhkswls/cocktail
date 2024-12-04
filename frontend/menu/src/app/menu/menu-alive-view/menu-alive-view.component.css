@@ -17,7 +17,7 @@
     justify-content: space-between;
     padding: 5% 0;
     position: relative;
-    background: linear-gradient(45deg, rgba(255, 89, 89, 0.6), rgba(86, 195, 165, 0.6)), url('/assets/christmas-background.png');
+    background: linear-gradient(45deg, rgba(255, 89, 89, 0.6), rgba(86, 195, 165, 0.6));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
