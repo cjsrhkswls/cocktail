@@ -4,20 +4,22 @@
     margin-bottom: 1%;
     position: relative;
     padding: 10px 0;
-  }
-  
-  .christmas-loading-bar {
+    background: rgba(0, 0, 0, 0.8); /* Slightly dark background to match the night theme */
+}
+
+/* Loading bar styling */
+.christmas-loading-bar {
     height: 50px;
-    border: 2px solid green;
+    border: 2px solid #4CAF50; /* Green border for a festive touch */
     border-radius: 25px;
     transition: width 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow for night effect */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5% 0;
+    padding: 0 5%;
     position: relative;
-    background: linear-gradient(45deg, rgba(255, 89, 89, 0.6), rgba(86, 195, 165, 0.6));
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(86, 195, 165, 0.6)); /* Darker gradient for a night look */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,17 +32,17 @@
     color: white;
     padding: 0 5%;
     z-index: 1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Darker shadow for better visibility */
 }
 
 /* Button integrated into the progress bar */
 .toggle-btn {
     font-size: 14px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background */
     color: white;
     border: none;
     border-radius: 15px;
-    padding: 15px 15px;
+    padding: 10px 15px; /* Adjusted padding for better fit */
     cursor: pointer;
     transition: background-color 0.3s ease;
     z-index: 1;
@@ -49,7 +51,7 @@
 }
 
 .toggle-btn:hover {
-    background-color: rgba(255, 0, 0, 0.7);
+    background-color: rgba(255, 0, 0, 0.8); /* Slightly darker red for hover effect */
 }
 
 /* Ensures text and button are not clipped */
@@ -65,4 +67,3 @@
     opacity: 0.7;
     z-index: 0;
 }
-  

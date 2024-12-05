@@ -1,108 +1,107 @@
+/* Container for the form */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+}
 
-  /* Container for the form */
-  .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10%;
-  }
-  
-  /* Card styling */
-  .card {
-    width: 60%;
-    align-items: center; 
-    background: linear-gradient(45deg, #ff5959, #56c3a5);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border: 5px solid #d94f6e;
-    animation: bounceIn 1s;
-  }
-  
-  /* Title and subtitle */
-  .title {
-    font-family: 'Pixel', sans-serif;
-    color: white;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .subtitle {
-    font-family: 'Pixel', sans-serif;
-    color: #fffae5;
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  /* Form field and inputs */
-  .form-field {
-    margin-bottom: 15px;
-  }
-  
-  .label {
-    font-family: 'Pixel', sans-serif;
-    color: #ffffff;
-    font-size: 18px;
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  .input {
-    width: 92%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .error {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-  }
-  
-  /* Submit button */
-  .submit-btn {
-    width: 96%;
-    font-family: 'Pixel', sans-serif;
-    font-size: 18px;
-    padding: 12px;
-    background-color: #ff6f61;
-    color: white;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  
-  .submit-btn:hover {
-    transform: scale(1.05);
-    background-color: #ff3b30;
-  }
-  
-  /* Footer section */
-  .card-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 20px;
-  }
-  
-  .footer-text {
-    font-family: 'Pixel', sans-serif;
-    color: #d9f7ff;
-    font-size: 14px;
-    text-align: center;
-  }
-  
-  /* Bounce-in animation */
-  @keyframes bounceIn {
-    0% { transform: translateY(-100%); opacity: 0; }
-    50% { transform: translateY(20px); opacity: 1; }
-    100% { transform: translateY(0); }
-  }
+/* Card styling */
+.card {
+  width: 60%;
+  align-items: center; 
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(86, 195, 165, 0.6)); /* Darker gradient for a night look */
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow for night effect */
+  border: 5px solid #4CAF50; /* Green border for a festive touch */
+  animation: bounceIn 1s;
+}
+
+/* Title and subtitle */
+.title {
+  font-family: 'Pixel', sans-serif;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-family: 'Pixel', sans-serif;
+  color: #fffae5;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Form field and inputs */
+.form-field {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-family: 'Pixel', sans-serif;
+  color: #ffffff;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 92%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 96%;
+  font-family: 'Pixel', sans-serif;
+  font-size: 18px;
+  padding: 12px;
+  background-color: rgb(176, 16, 16, 0.5);
+  color: white;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darker shadow */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+  background-color: #ff3b30;
+}
+
+/* Footer section */
+.card-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.footer-text {
+  font-family: 'Pixel', sans-serif;
+  color: #d9f7ff;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Bounce-in animation */
+@keyframes bounceIn {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { transform: translateY(20px); opacity: 1; }
+  100% { transform: translateY(0); }
+}

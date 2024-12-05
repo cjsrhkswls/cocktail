@@ -46,7 +46,7 @@ export class MenuService extends Service {
         this.checkId(userId);
 
         try{
-            console.log(userId);
+            
             const orderAlive = await this.orderService.getOrderByUserIdStatus(userId, OrderStatus.REQUESTED);
             
             if (orderAlive && orderAlive !== null) {

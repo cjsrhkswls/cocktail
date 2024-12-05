@@ -1,139 +1,54 @@
-/* app.component.css */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(30%, 1fr));
-  /* Automatically adjust column width */
-  gap: 5%;
-  /* Even spacing between the cards */
-  padding: 5%;
-  border-radius: 10px;
-  justify-items: center;
-  /* Centers items horizontally within each grid cell */
-}
-
-.menu-card-container {
-  width: 100%;
-  /* Adjust width to fit the container */
-  height: 100%;
-  /* Ensure the container takes full height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15%;
-}
-
-.menu-card {
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background: linear-gradient(45deg, rgba(255, 89, 89, 0.8), rgba(86, 195, 165, 0.8));
-  /* Combine gradient with the background image */
-  background-size: cover; /* Ensure the background covers the entire card */
-  background-position: center; /* Center the background */
-  background-repeat: no-repeat; /* Prevent repeating the background */
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease-in-out;
-  cursor: pointer;
-  width: 85%;
-  /* Make sure the card takes full width of the container */
-  height: 85%;
-  /* Ensure the card's height fits the container */
-}
-
-.menu-card.focused {
-  transform: rotateY(180deg);
-  /* Flip the card when it's focused */
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  backface-visibility: hidden;
-  /* Hide the back face when flipped */
-  border-radius: 10px;
-  width: 100%;
-  /* Ensure front and back are full size of the card */
-  height: 100%;
-  /* Ensure front and back are full size of the card */
-}
-
-.card-front {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.card-back {
-  background: linear-gradient(45deg, rgba(255, 89, 89, 0.8), rgba(86, 195, 165, 0.8));
-  /* Christmas gradient background for the back */
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  color: rgba(4, 12, 7, 0.992);
-  text-align: center;
+.menu-container {
   padding: 20px;
-  transform: rotateY(180deg);
-  /* Initially hide the back face */
-}
-
-.card-header {
-  background: linear-gradient(45deg, rgba(86, 195, 165, 0.8), rgba(255, 89, 89, 0.8));
-  /* Christmas red */
-  color: white;
+  color: #f8eee6;
+  font-family: 'Merriweather', serif;
   text-align: center;
-  padding: 1%;
+  border-radius: 10px;
 }
 
-.card-header h3 {
-  margin: 0;
-  font-weight: bold;
+.title {
+  font-size: 2rem;
+  color: #f4d03f;
+  margin-bottom: 20px;
 }
 
-.card-content {
-  padding: 2%;
-  text-align: center;
-  color: #440404;
-  font-size: 1.1em;
+.menu-list {
+  list-style: none;
+  padding: 0;
 }
 
-.card-back p {
-  font-size: 1em;
-  color: white;
+.menu-item {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-}
-
-.order-btn {
-  width: 90%;
-  font-family: 'Pixel', sans-serif;
-  font-size: 15px;
-  padding: 4%;
-  background: linear-gradient(45deg, rgba(86, 195, 165, 0.8), rgba(255, 89, 89, 0.8));
-  color: white;
+  padding: 10px 15px;
+  margin: 10px 0;
+  font-size: 1.5rem;
+  background-color: rgba(22, 3, 3, 0.4);
   border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:hover {
+  background-color: rgba(22, 3, 3, 0.8);
+}
+
+.menu-details {
+  text-align: left;
+
+}
+
+.order-button {
+  background-color: rgba(249, 7, 7, 0.2);
+  color: #fff;
   border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 15px;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.order-btn:hover {
-  transform: scale(1.05);
-  background-color: #ff3b30;
-}
-
-/* Responsive for smaller screens */
-@media (max-width: 1024px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-    /* Adjust column width on tablet */
-  }
-}
-
-@media (max-width: 600px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-    /* 1 column on mobile */
-  }
+.order-button:hover {
+  background-color: #fa3c3c;
 }

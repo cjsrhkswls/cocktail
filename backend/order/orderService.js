@@ -204,7 +204,7 @@ export class OrderService extends Service {
         this.checkStringValue(newStatus);
 
         const aRequester = await this.userDataFacade.getUserById(userId);
-        console.log(aRequester);
+        
         if (!aRequester || aRequester === null) {
             this.throwError(`The user:${userId} who is trying to update does not exist!!`);
         }

@@ -1,25 +1,14 @@
 
-<div class="card-grid">
-  <div
-    *ngFor="let menuItem of menu"
-    class="menu-card-container"
-    (click)="onCardClick($event)"
-  >
-    <div class="menu-card">
-      <div class="card-front">
-        <div class="card-header">
-          <h3>{{ menuItem.menuName }}</h3>
-        </div>
-        <div class="card-content">
-          <p>Alcohol degree: {{ menuItem.alcoholLevel }}</p>
-        </div>
-      </div>
-      <div class="card-back">
+<div class="menu-container">
+  <h1 class="title">🎄 Christmas Menu 🎄</h1>
+  <ul class="menu-list">
+    <li *ngFor="let menuItem of menu" class="menu-item">
+      <div class="menu-details">
+        <p><strong>{{ menuItem.menuName }}</strong></p>
         <p>{{ menuItem.menuDescription }}</p>
-        <div>
-          <button class="order-btn" (click)="order(menuItem)">🎉 Order</button>
-        </div>
+        <p><small>Alcohol Level: {{ menuItem.alcoholLevel }}</small></p>
       </div>
-    </div>
-  </div>
+      <button class="order-button" (click)="order(menuItem)">🎉Order</button>
+    </li>
+  </ul>
 </div>
