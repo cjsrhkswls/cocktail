@@ -44,7 +44,6 @@ export class OrderListComponent implements OnInit {
     this.fetchMenuAliveDataRepeatedly().subscribe(i => {
       if (i){
         if (this.isDifferent(i)){
-          // TODO: Push alarm has to be implemented
           this.snackbarService.notifyMessageWithSecs('New Order has been added!', 600);
         }
         this.allOrderInfo = this.convertAllInfoToSummaries(i);
@@ -119,6 +118,22 @@ export class OrderListComponent implements OnInit {
           }
         }
       )
+    }
+  }
+
+  reset(resetCode:string){
+    if (this.currentUser){
+      this.orderService.reset(this.currentUser?.userId, resetCode).subscribe(
+        m => {
+          this.snackbarService.notifyMessage('All data has been reset!!');
+          window.location.reload();
+        },
+        error => {
+          this.snackbarService.notifyMessage('The rest code is invalid!!');
+        }
+      )
+    } else {
+      this.snackbarService.notifyMessageWithSecs('The current user is missing!!', 30);
     }
   }
 }

@@ -81,7 +81,6 @@ export class MenuComponent implements OnInit{
         if(mWo.orderStatus === OrderStatus.REQUESTED){
           this.menuAlive = mWo;
         } else {
-          // TODO: Push alarm has to be implemented here.
           this.snackbarService.notifyMessageWithSecs(`Your order:${this.menuAlive.menu.menuName} has been ${mWo.orderStatus}`, 30);
           this.menuAlive = this.tempMenu;
         }

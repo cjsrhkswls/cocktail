@@ -51,6 +51,14 @@
     font-size: 1rem;
 }
 
+/* Filter select styling */
+.filter-container input {
+    padding: 5px 10px;
+    border: 2px solid #d04545; /* Festive red */
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
 /* Summary item styling */
 .summary-item {
     display: flex;
@@ -106,4 +114,13 @@
 
 .complete:hover {
     background-color: #2e8b57;
+}
+
+.reset {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.reset:hover {
+    background-color: #e63939;
 }

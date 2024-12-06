@@ -6,15 +6,20 @@
     <div class="filter-container">
         <label for="statusFilter">Filter by Status:</label>
         <select id="statusFilter" [(ngModel)]="filterStatus">
-          <option value="">All</option>
-          <option value="{{ORDER_STATUS_REQUESTED}}">Requested</option>
-          <option value="{{ORDER_STATUS_CANCELED}}">Canceled</option>
-          <option value="{{ORDER_STATUS_COMPLETED}}">Completed</option>
-          <option value="{{ORDER_STATUS_REJECTED}}">Rejected</option>
+            <option value="">All</option>
+            <option value="{{ORDER_STATUS_REQUESTED}}">Requested</option>
+            <option value="{{ORDER_STATUS_CANCELED}}">Canceled</option>
+            <option value="{{ORDER_STATUS_COMPLETED}}">Completed</option>
+            <option value="{{ORDER_STATUS_REJECTED}}">Rejected</option>
         </select>
-      </div>
 
-      
+        <div>
+            <label for="statusFilter">Reset code:</label>
+            <input type="text" id="reset" [(ngModel)]="resetCode" />
+            <button class="btn reset" [disabled]="resetCode===''" (click)="reset()">Reset</button>
+        </div>
+    </div>
+
     <div class="summary-item" *ngFor="let summary of filteredSummaries">
         <div class="summary-details">
             <p><strong>Order ID:</strong> {{ summary.orderId }}</p>
@@ -23,8 +28,10 @@
             <p><strong>Status:</strong> {{ summary.orderStatus }}</p>
         </div>
         <div class="summary-actions" *ngIf="summary.orderStatus===ORDER_STATUS_REQUESTED">
-            <button class="btn reject" [disabled]="summary.orderStatus!==ORDER_STATUS_REQUESTED" (click)="reject(summary.orderId)">Reject</button>
-            <button class="btn complete" [disabled]="summary.orderStatus!==ORDER_STATUS_REQUESTED" (click)="complete(summary.orderId)">Complete</button>
+            <button class="btn reject" [disabled]="summary.orderStatus!==ORDER_STATUS_REQUESTED"
+                (click)="reject(summary.orderId)">Reject</button>
+            <button class="btn complete" [disabled]="summary.orderStatus!==ORDER_STATUS_REQUESTED"
+                (click)="complete(summary.orderId)">Complete</button>
         </div>
     </div>
 </main>

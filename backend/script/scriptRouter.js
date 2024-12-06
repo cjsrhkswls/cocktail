@@ -1,22 +1,19 @@
 import express from 'express';
-import { reset } from './dml.js';
+import { ScriptService } from './scriptService.js';
 
 const router = express.Router();
+const scriptService = new ScriptService();
 
-router.get('/reset/:key', async (req, res, next) => {
-    const key = req.params.key;
+router.put('/reset', async (req, res, next) => {
     try{
-        if (key === process.env.RESET_KEY){
-            reset();
-            return res.json({
-                msg: 'All your data successfully has been reset!'
-            })
-        }
-        res.json({
-            msg: 'Your key is not valid!'
-        });
+        const {userId, code} = req.body;
+
+        await scriptService.resetData(userId, code);
+        res.json('done');
     } catch (err) {
+        console.log(err);
         const error = new Error('Unexpected error while resetting data!!');
+        error.status = 400;
         return next(error);
     }
 });

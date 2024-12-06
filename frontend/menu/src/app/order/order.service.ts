@@ -22,4 +22,8 @@ export class OrderService {
   completeOrder(userId:number, orderId: number){
     return this.httpClient.put<Order>(environment.backendAPIBase + '/order/complete', {userId: userId, orderId: orderId});
   }
+
+  reset(userId:number, resetCode: string){
+    return this.httpClient.put<void>(environment.backendAPIBase + '/script/reset', {userId: userId, code:resetCode});
+  }
 }

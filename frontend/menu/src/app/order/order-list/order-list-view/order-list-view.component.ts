@@ -16,6 +16,7 @@ export class OrderListViewComponent {
   @Input() orders:Summary[] = [];
   @Output() rejectEvent = new EventEmitter<number>();
   @Output() completeEvent = new EventEmitter<number>();
+  @Output() resetEvent = new EventEmitter<string>();
 
   ORDER_STATUS_REQUESTED = OrderStatus.REQUESTED;
   ORDER_STATUS_CANCELED = OrderStatus.CANCELED;
@@ -23,6 +24,7 @@ export class OrderListViewComponent {
   ORDER_STATUS_COMPLETED = OrderStatus.COMPLETED;
 
   filterStatus: string = ''; 
+  resetCode: string = '';
 
   get filteredSummaries(): Summary[] {
     // Filter summaries based on the filterStatus
@@ -37,5 +39,11 @@ export class OrderListViewComponent {
 
   complete(orderId:number) {
     this.completeEvent.emit(orderId);
+  }
+
+  reset(){
+    if(this.resetCode){
+      this.resetEvent.emit(this.resetCode);
+    }
   }
 }
