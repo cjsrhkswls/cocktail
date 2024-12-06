@@ -1,7 +1,6 @@
 .menu-container {
   padding: 20px;
-  color: #f8eee6;
-  font-family: 'Merriweather', serif;
+  color: #fad6d6;
   text-align: center;
   border-radius: 10px;
 }
@@ -24,7 +23,7 @@
   padding: 10px 15px;
   margin: 10px 0;
   font-size: 1.5rem;
-  background-color: rgba(22, 3, 3, 0.4);
+  background-color: rgba(22, 3, 3, 0.5);
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

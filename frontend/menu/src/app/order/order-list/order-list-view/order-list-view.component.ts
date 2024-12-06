@@ -23,7 +23,7 @@ export class OrderListViewComponent {
   ORDER_STATUS_REJECTED = OrderStatus.REJECTED;
   ORDER_STATUS_COMPLETED = OrderStatus.COMPLETED;
 
-  filterStatus: string = ''; 
+  filterStatus: string = this.ORDER_STATUS_REQUESTED; 
   resetCode: string = '';
 
   get filteredSummaries(): Summary[] {

@@ -1,7 +1,6 @@
 /* Container for the summary */
 .summary-container {
     margin: 0;
-    font-family: 'Arial', sans-serif;
     color: #fff; /* Lighter text color for better contrast */
     padding: 10px;
     display: flex;

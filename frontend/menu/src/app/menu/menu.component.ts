@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Menu, MenuWithOrder } from '../model/menu';
 import { MenuService } from './menu.service';
 import { MenuViewComponent } from "./menu-view/menu-view.component";
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { SnackbarService } from '../common/snackbar/snackbar.service';
 import { switchMap, interval, Observable, catchError, of } from 'rxjs';
 import { OrderStatus } from '../code';
+import { MatDialog } from '@angular/material/dialog';
+import { MenuDialogComponent } from './menu-view/menu-dialog/menu-dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -45,7 +47,7 @@ export class MenuComponent implements OnInit{
     orderStatus: '',
   };
 
-  constructor(private readonly router: Router, public menuService: MenuService, public authService: AuthService, public snackbarService: SnackbarService) { }
+  constructor(private readonly router: Router, public ngZone:NgZone, public menuService: MenuService, public authService: AuthService, public snackbarService: SnackbarService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.authService.getUserProfile().subscribe(
@@ -81,7 +83,7 @@ export class MenuComponent implements OnInit{
         if(mWo.orderStatus === OrderStatus.REQUESTED){
           this.menuAlive = mWo;
         } else {
-          this.snackbarService.notifyMessageWithSecs(`Your order:${this.menuAlive.menu.menuName} has been ${mWo.orderStatus}`, 30);
+          this.snackbarService.notifyMessageWithSecs(`Your order:${this.menuAlive.menu.menuName} has been ${mWo.orderStatus}`, 300);
           this.menuAlive = this.tempMenu;
         }
       } else {

@@ -1,4 +1,3 @@
-
 .snowflakescontainer {
   position: absolute; 
   top: 0;
@@ -12,7 +11,7 @@
   background-repeat: no-repeat;
 
   z-index: -1; 
-  font-family: 'Pixel', sans-serif;
+  font-family: 'Press Start 2P', Monospace, Courier;
   overflow: hidden;
 }
 
