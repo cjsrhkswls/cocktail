@@ -10,7 +10,6 @@ import { SnackbarService } from '../common/snackbar/snackbar.service';
 import { switchMap, interval, Observable, catchError, of } from 'rxjs';
 import { OrderStatus } from '../code';
 import { MatDialog } from '@angular/material/dialog';
-import { MenuDialogComponent } from './menu-view/menu-dialog/menu-dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -83,7 +82,7 @@ export class MenuComponent implements OnInit{
         if(mWo.orderStatus === OrderStatus.REQUESTED){
           this.menuAlive = mWo;
         } else {
-          this.snackbarService.notifyMessageWithSecs(`Your order:${this.menuAlive.menu.menuName} has been ${mWo.orderStatus}`, 300);
+          this.snackbarService.notifyMessageWithSecs(`Your order:${this.menuAlive.menu.menuName} has been ${mWo.orderStatus}`, 600);
           this.menuAlive = this.tempMenu;
         }
       } else {
