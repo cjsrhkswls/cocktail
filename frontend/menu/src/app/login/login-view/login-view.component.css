@@ -48,6 +48,7 @@
 .input {
   width: 92%;
   padding: 10px;
+  font-family: 'Press Start 2P', Monospace, Courier;
   font-size: 16px;
   border-radius: 5px;
   border: none;
@@ -64,6 +65,7 @@
 /* Submit button */
 .submit-btn {
   width: 96%;
+  font-family: 'Press Start 2P', Monospace, Courier;
   font-size: 18px;
   padding: 12px;
   background-color: rgb(176, 16, 16, 0.5);

@@ -27,6 +27,7 @@
 
 /* Menu name inside the progress bar */
 .menu-name {
+    font-family: 'Press Start 2P', Monospace, Courier;
     font-size: 16px;
     font-weight: bold;
     color: white;
@@ -37,6 +38,7 @@
 
 /* Button integrated into the progress bar */
 .toggle-btn {
+    font-family: 'Press Start 2P', Monospace, Courier;
     font-size: 14px;
     background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background */
     color: white;
