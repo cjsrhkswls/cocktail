@@ -56,7 +56,7 @@ export class OrderListComponent implements OnInit {
   }
 
   fetchMenuAliveDataRepeatedly(): Observable<any> {
-    return interval(120000).pipe(
+    return interval(100000).pipe(
       switchMap(() =>
         this.fetchMenuAliveData().pipe(
           catchError((error) => {

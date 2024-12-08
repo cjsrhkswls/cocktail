@@ -73,7 +73,7 @@ export class UserService extends Service {
         const users = await this.userDataFacade.getAllUsers();
 
         if (users.length > 50) {
-            this.throwError(`login: Cannot proceed the login process since the number of users exceeds 150`);
+            this.throwError(`login: Cannot proceed the login process since the number of users exceeds 50`);
         }
 
         const existingUser = await this.userDataFacade.getUserByEmail(newUser.userEmail);
