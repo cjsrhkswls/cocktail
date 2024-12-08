@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    backendAPIBase: 'http://localhost:8145/api',
+    backendAPIBase: '3.144.20.119:8145/api',
   };
