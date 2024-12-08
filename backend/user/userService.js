@@ -70,6 +70,12 @@ export class UserService extends Service {
         this.checkStringValue(newUser.userEmail);
         this.checkStringValue(newUser.userNickname);
 
+        const users = await this.userDataFacade.getAllUsers();
+
+        if (users.length > 50) {
+            this.throwError(`login: Cannot proceed the login process since the number of users exceeds 150`);
+        }
+
         const existingUser = await this.userDataFacade.getUserByEmail(newUser.userEmail);
         if (existingUser || existingUser !== null) {
             if (existingUser.userNickname !== newUser.userNickname){

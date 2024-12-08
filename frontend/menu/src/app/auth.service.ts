@@ -36,7 +36,7 @@ export class AuthService {
       },
       error => {
         console.log(error);
-        this.snackbarService.notifyMessage(error.message);
+        this.snackbarService.notifyMessage('Authentication error, please contact Admin!!');
       }
     )
   }
