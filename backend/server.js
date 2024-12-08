@@ -11,12 +11,14 @@ import { User } from './model/user.js'
 import { Order } from './model/order.js'
 import errorHandler from './framework/errorHandler.js'
 import cors from 'cors'
+import path from 'path'
+import { fileURLToPath } from 'node:url';
 
 const PORT = process.env.PORT | 8080;
 const app = express();
 // CORS setting must be placed on the very top
 app.use(cors({
-  origin:[`${process.env.ANGULAR_ORIGIN1}`, `${process.env.ANGULAR_ORIGIN2}`]
+  origin:["*"]
 }));
 app.options('*', cors());
 
@@ -28,6 +30,11 @@ app.use('/api/user', user);
 app.use('/api/script', script);
 app.use(errorHandler);
 
+const __filename = fileURLToPath(import.meta.url);
+app.use(express.static(path.join(path.dirname(__filename), 'public/menu/browser')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(path.dirname(__filename), 'public/menu/browser','index.html'))
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port:${PORT}`);
