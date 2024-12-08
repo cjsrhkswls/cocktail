@@ -17,9 +17,7 @@ import { fileURLToPath } from 'node:url';
 const PORT = process.env.PORT | 8080;
 const app = express();
 // CORS setting must be placed on the very top
-app.use(cors({
-  origin:["*"]
-}));
+app.use(cors());
 app.options('*', cors());
 
 app.use(express.json());
