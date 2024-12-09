@@ -15,7 +15,7 @@ export class SnackbarService {
         data: {
           message: message,
         },
-        duration: 8000,
+        duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top'
       });

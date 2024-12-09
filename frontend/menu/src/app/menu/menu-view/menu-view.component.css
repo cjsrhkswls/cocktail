@@ -1,14 +1,37 @@
 .menu-container {
-  padding: 20px;
+  padding: 17px;
   color: #fad6d6;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 8px;
+}
+
+.menu-alcohol {
+  color: #bef8c8
+}
+
+.menu-name {
+  color: #f39494;
+}
+
+.high-alcohol {
+  color: red;
+  font-weight: bold;
+}
+
+.medium-alcohol {
+  color: orange;
+  font-weight: bold;
+}
+
+.low-alcohol {
+  color: green;
+  font-weight: bold;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 1.7rem;
   color: #f4d03f;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
 }
 
 .menu-list {
@@ -20,11 +43,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 9px 13px;
   margin: 10px 0;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   background-color: rgba(22, 3, 3, 0.5);
-  border-radius: 5px;
+  border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,11 +64,11 @@
   background-color: rgba(249, 7, 7, 0.2);
   color: #fff;
   border: none;
-  padding: 10px 15px;
+  padding: 8px 12px;
   font-family: 'Press Start 2P', Monospace, Courier;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 4px;
   transition: background-color 0.3s;
 }
 

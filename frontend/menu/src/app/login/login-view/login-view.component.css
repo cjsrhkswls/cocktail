@@ -12,7 +12,7 @@
   align-items: center; 
   background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(86, 195, 165, 0.6)); /* Darker gradient for a night look */
   border-radius: 20px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow for night effect */
   border: 5px solid #4CAF50; /* Green border for a festive touch */
   animation: bounceIn 1s;
@@ -21,35 +21,35 @@
 /* Title and subtitle */
 .title {
   color: white;
-  font-size: 20px;
+  font-size: 17px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 }
 
 .subtitle {
   color: #fffae5;
   text-align: center;
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: 13px;
+  margin-bottom: 17px;
 }
 
 /* Form field and inputs */
 .form-field {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .label {
   color: #ffffff;
-  font-size: 18px;
+  font-size: 15px;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .input {
   width: 92%;
   padding: 10px;
   font-family: 'Press Start 2P', Monospace, Courier;
-  font-size: 16px;
+  font-size: 13px;
   border-radius: 5px;
   border: none;
   background-color: #ffffff;
@@ -58,19 +58,19 @@
 
 .error {
   color: red;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 10px;
+  margin-top: 4px;
 }
 
 /* Submit button */
 .submit-btn {
   width: 96%;
   font-family: 'Press Start 2P', Monospace, Courier;
-  font-size: 18px;
-  padding: 12px;
+  font-size: 15px;
+  padding: 10px;
   background-color: rgb(176, 16, 16, 0.5);
   color: white;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darker shadow */
   cursor: pointer;
@@ -87,7 +87,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 18px;
 }
 
 .footer-text {

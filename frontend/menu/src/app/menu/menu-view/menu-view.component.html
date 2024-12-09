@@ -1,12 +1,16 @@
-
 <div class="menu-container">
   <h1 class="title">🎄HoHoBar Menu🎄</h1>
   <ul class="menu-list">
     <li *ngFor="let menuItem of menu" class="menu-item">
       <div class="menu-details">
-        <p><strong>{{ menuItem.menuName }}</strong></p>
+        <p class="menu-name"><strong>{{ menuItem.menuName }}</strong></p>
         <p>{{ menuItem.menuDescription }}</p>
-        <p><small>Alcohol Level: {{ menuItem.alcoholLevel }}</small></p>
+        <p class="menu-alcohol">
+          Alcohol Level: <small [ngClass]="{
+            'high-alcohol': menuItem.alcoholLevel === 'High',
+            'medium-alcohol': menuItem.alcoholLevel === 'Medium',
+            'low-alcohol': menuItem.alcoholLevel === 'Low'
+          }"> {{ menuItem.alcoholLevel }}</small></p>
       </div>
       <button class="order-button" (click)="order(menuItem)">🎉Order</button>
     </li>
