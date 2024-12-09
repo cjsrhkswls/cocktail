@@ -119,7 +119,7 @@ export class MenuComponent implements OnInit{
         console.log(m);
         if (m) {
           this.menuAlive = m;
-          this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menu.menuName} is requested!`);
+          this.snackbarService.notifyMessage(`Your order: ${this.menuAlive.menu.menuName} has been requested!`);
         }
       },
         error => {
