@@ -74,6 +74,20 @@ export class AuthService {
     }
   }
 
+  isAdminLoggedin(){
+    const cacheUser = this.getUser();
+    const currentUser = this.getCurrentUserProfile();
+
+    if (currentUser) {
+      return currentUser.userType === UserType.ADMIN;
+    } else if (cacheUser) {
+      this.profile.next(cacheUser);
+      return cacheUser.userType === UserType.ADMIN;
+    } else {
+      return false;
+    }
+  }
+
   getCurrentUserProfile() {
     return this.profile.getValue();
   }
