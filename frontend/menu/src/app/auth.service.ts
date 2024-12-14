@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './model/user';
 import { Router } from '@angular/router';
-import { UserType } from './code';
+import { UserStatus, UserType } from './code';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { SnackbarService } from './common/snackbar/snackbar.service';
@@ -29,7 +29,11 @@ export class AuthService {
           if (this.profile.getValue().userType === UserType.ADMIN) {
             this.router.navigate(['/list']);
           } else {
-            this.router.navigate(['/home']);
+            if (this.profile.getValue().userStatus === UserStatus.CONFIRMED){
+              this.router.navigate(['/home']);
+            } else {
+              this.snackbarService.notifyMessageWithSecs(`Hi ${this.profile.getValue().userNickname}, Your account is waiting for approval`, 8);
+            }
           }
 
         }
@@ -65,10 +69,10 @@ export class AuthService {
     const currentUser = this.getCurrentUserProfile();
 
     if (currentUser) {
-      return true;
+      return currentUser.userStatus === UserStatus.CONFIRMED;
     } else if (cacheUser) {
       this.profile.next(cacheUser);
-      return true;
+      return cacheUser.userStatus === UserStatus.CONFIRMED;
     } else {
       return false;
     }

@@ -1,5 +1,5 @@
 import { Menu } from "../model/menu.js";
-import { AlcoholLevel, MenuType, UserType } from '../code.js';
+import { AlcoholLevel, MenuType, UserStatus, UserType } from '../code.js';
 import { User } from "../model/user.js";
 import { Order } from "../model/order.js"
 import { conn } from "../framework/databaseConnection.js";
@@ -118,6 +118,7 @@ export const reset = (async () => {
                         userNickname:'Gwanjin',
                         userEmail: 'cjsrhkswls@gmail.com',
                         userType: UserType.ADMIN,
+                        userStatus: UserStatus.CONFIRMED,
                     }
                 );
 
@@ -126,6 +127,7 @@ export const reset = (async () => {
                         userNickname:'Eileen',
                         userEmail: 'eileens93@hotmail.com',
                         userType: UserType.CUSTOMER,
+                        userStatus: UserStatus.CONFIRMED,
                     }
                 )
             }

@@ -1,0 +1,19 @@
+<!-- src/app/navbar/navbar.component.html -->
+<nav class="navbar">
+    <div class="navbar-container">
+      <a class="navbar-brand">HoHoBar</a>
+      <ul class="navbar-menu" [ngClass]="{ 'active': menuActive }">
+        <li class="navbar-item">
+          <a class="navbar-link" (click)="navigateToOrderManagement()">Order Management</a>
+        </li>
+        <li class="navbar-item">
+          <a class="navbar-link" (click)="navigateToMenuManagement()">Menu Management</a>
+        </li>
+        <li class="navbar-item">
+          <a class="navbar-link" (click)="navigateToUserManagement()">User Management</a>
+        </li>
+      </ul>
+      <button class="navbar-toggle" (click)="toggleMenu()">☰</button>
+    </div>
+  </nav>
+  

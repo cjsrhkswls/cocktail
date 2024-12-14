@@ -1,0 +1,143 @@
+.menu-container {
+  padding: 17px;
+  color: #fad6d6;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.menu-alcohol {
+  color: #bef8c8
+}
+
+.menu-name {
+  color: #f39494;
+}
+
+.high-alcohol {
+  color: red;
+  font-weight: bold;
+}
+
+.medium-alcohol {
+  color: orange;
+  font-weight: bold;
+}
+
+.low-alcohol {
+  color: green;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1.7rem;
+  color: #f4d03f;
+  margin-bottom: 17px;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 13px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  background-color: rgba(22, 3, 3, 0.5);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:hover {
+  background-color: rgba(22, 3, 3, 0.8);
+}
+
+.menu-details {
+  text-align: left;
+
+}
+
+.delete-button {
+  background-color: rgba(249, 7, 7, 0.2);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-family: 'Press Start 2P', Monospace, Courier;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #fa3c3c;
+}
+
+form {
+  width: 50%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(22, 3, 3, 0.5);
+}
+
+.field-container {
+  padding: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+  font-family: 'Press Start 2P', Monospace, Courier;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+.submit-btn {
+  background-color: rgba(249, 7, 7, 0.2);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-family: 'Press Start 2P', Monospace, Courier;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:disabled {
+  background-color: #f2abab;
+}
+
+.submit-btn:hover {
+  background-color: #fa3c3c;
+}

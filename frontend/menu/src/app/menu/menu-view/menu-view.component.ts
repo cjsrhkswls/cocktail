@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-menu-view',
   standalone: true,
-  imports: [CommonModule, ],
+  imports: [CommonModule],
   templateUrl: './menu-view.component.html',
   styleUrl: './menu-view.component.css'
 })

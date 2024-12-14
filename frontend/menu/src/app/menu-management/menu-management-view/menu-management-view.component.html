@@ -1,0 +1,45 @@
+<div class="menu-container">
+  <h1 class="title">🎄Menu Management🎄</h1>
+
+  <form [formGroup]="menuForm" (ngSubmit)="createMenu()">
+    <div class="field-container">
+      <label for="menuName">Menu Name</label>
+      <input id="menuName" formControlName="menuName" type="text">
+      <div class="error" *ngIf="menuForm.get('menuName')!.invalid && menuForm.get('menuName')!.touched">
+        Menu Name is required.
+      </div>
+    </div>
+    <div class="field-container">
+      <label for="menuDescription">Menu Description</label>
+      <textarea id="menuDescription" formControlName="menuDescription"></textarea>
+      <div class="error" *ngIf="menuForm.get('menuDescription')!.invalid && menuForm.get('menuDescription')!.touched">
+        Menu Description is required.
+      </div>
+    </div>
+    <div class="field-container">
+      <label for="alcoholLevel">Alcohol Level</label> <select id="alcoholLevel" formControlName="alcoholLevel">
+        <option *ngFor="let level of alcoholLevels" [value]="level">{{ level }}</option>
+      </select>
+      <div class="error" *ngIf="menuForm.get('alcoholLevel')!.invalid && menuForm.get('alcoholLevel')!.touched">
+        Alcohol Level is required.
+      </div>
+    </div>
+    <button class="submit-btn" type="submit" [disabled]="menuForm.invalid">Submit</button>
+  </form>
+
+  <ul class="menu-list">
+    <li *ngFor="let menuItem of menus" class="menu-item">
+      <div class="menu-details">
+        <p class="menu-name"><strong>{{ menuItem.menuName }}</strong></p>
+        <p>{{ menuItem.menuDescription }}</p>
+        <p class="menu-alcohol">
+          Alcohol Level: <small [ngClass]="{
+              'high-alcohol': menuItem.alcoholLevel === 'High',
+              'medium-alcohol': menuItem.alcoholLevel === 'Medium',
+              'low-alcohol': menuItem.alcoholLevel === 'Low'
+            }"> {{ menuItem.alcoholLevel }}</small></p>
+      </div>
+      <button class="delete-button" (click)="deleteMenu(menuItem.menuId)">DELETE</button>
+    </li>
+  </ul>
+</div>

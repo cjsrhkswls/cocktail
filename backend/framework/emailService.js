@@ -19,7 +19,7 @@ export class EmailService {
         const mailOptions = {
             from: process.env.BREVO_EMAIL,
             to: process.env.OWNER_EMAIL,
-            subject: '2024 Christmas Cocktails: New order has been delivered!!',
+            subject: 'HoHoBar: New order has been delivered!!',
             text: `
             <!DOCTYPE html>
             <html lang="en">
@@ -91,7 +91,7 @@ export class EmailService {
         const mailOptions = {
             from: process.env.BREVO_EMAIL,
             to: user.userEmail,
-            subject: `2024 Christmas Cocktails: Hi ${user.userNickname},  your order has been requested!!`,
+            subject: `HoHoBar: Hi ${user.userNickname},  your order has been requested!!`,
             text: `
                 <!DOCTYPE html>
                 <html lang="en">
@@ -163,7 +163,7 @@ export class EmailService {
         const mailOptions = {
             from: process.env.BREVO_EMAIL,
             to: user.userEmail,
-            subject: `2024 Christmas Cocktails: Hi ${user.userNickname}, your order has been ${order.orderStatus}!!`,
+            subject: `HoHoBar: Hi ${user.userNickname}, your order has been ${order.orderStatus}!!`,
             text: `
                 <!DOCTYPE html>
                 <html lang="en">
@@ -239,7 +239,7 @@ export class EmailService {
         const mailOptions = {
             from: process.env.BREVO_EMAIL,
             to: process.env.OWNER_EMAIL,
-            subject: `2024 Christmas Cocktails: Order:${order.orderId} has been ${order.orderStatus}!!`,
+            subject: `HoHoBar: Order:${order.orderId} has been ${order.orderStatus}!!`,
             text: `
                 <!DOCTYPE html>
                 <html lang="en">
@@ -281,6 +281,159 @@ export class EmailService {
                         <tr>
                             <td align="center" style="font-size: 14px; color: #6a1b9a; font-style: italic; padding: 10px;">
                             "Merry Christmas!"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="padding: 20px;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                <td style="width: 33.33%; text-align: center; font-size: 24px; line-height: 40px;">❄️</td>
+                                <td style="width: 33.33%; text-align: center; font-size: 24px; line-height: 40px;">❄️</td>
+                                <td style="width: 33.33%; text-align: center; font-size: 24px; line-height: 40px;">❄️</td>
+                                </tr>
+                            </table>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>
+                </body>
+                </html>`,
+        };
+
+        this.transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+    }
+
+
+    sendMailToOwnerForNewUser = (newUser) => {
+        const mailOptions = {
+            from: process.env.BREVO_EMAIL,
+            to: process.env.OWNER_EMAIL,
+            subject: `HoHoBar: New user:${newUser.userNickname} has been added!!`,
+            text: `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>New User has been added</title>
+                </head>
+                <body style="margin: 0; padding: 0; background: #d7e5f4; font-family: 'Poppins', sans-serif; color: #333;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background: #d7e5f4; padding: 20px;">
+                    <tr>
+                    <td align="center">
+                        <table width="600px" border="0" cellpadding="20" cellspacing="0" style="background: #ffffff; border-radius: 20px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);">
+                        <tr>
+                            <td align="center" style="font-size: 24px; font-weight: bold; color: #1565c0; text-transform: uppercase; padding: 10px;">
+                            📦 New User 📦
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 48px; padding: 10px;">
+                            ☃️
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 18px; font-weight: bold; color: #424242; padding: 10px;">
+                            The User status is ${newUser.userStatus}!
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 20px; font-weight: bold; color: #3949ab; padding: 10px;">
+                            User Nickname: ${newUser.userNickname}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 18px; color: #2e7d32; padding: 10px;">
+                            User Email: ${newUser.userEmail}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 14px; color: #6a1b9a; font-style: italic; padding: 10px;">
+                            "Merry Christmas!"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="padding: 20px;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                <td style="width: 33.33%; text-align: center; font-size: 24px; line-height: 40px;">❄️</td>
+                                <td style="width: 33.33%; text-align: center; font-size: 24px; line-height: 40px;">❄️</td>
+                                <td style="width: 33.33%; text-align: center; font-size: 24px; line-height: 40px;">❄️</td>
+                                </tr>
+                            </table>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>
+                </body>
+                </html>`,
+        };
+
+        this.transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+    }
+
+    sendMailToUserForUpdates = (newUser) => {
+        const mailOptions = {
+            from: process.env.BREVO_EMAIL,
+            to: newUser.userEmail,
+            subject: `HoHoBar: Hi ${newUser.userNickname}, your login request has been ${newUser.userStatus}!!`,
+            text: `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Your account has been ${newUser.userStatus}</title>
+                </head>
+                <body style="margin: 0; padding: 0; background: #d7e5f4; font-family: 'Poppins', sans-serif; color: #333;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background: #d7e5f4; padding: 20px;">
+                    <tr>
+                    <td align="center">
+                        <table width="600px" border="0" cellpadding="20" cellspacing="0" style="background: #ffffff; border-radius: 20px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);">
+                        <tr>
+                            <td align="center" style="font-size: 24px; font-weight: bold; color: #1565c0; text-transform: uppercase; padding: 10px;">
+                            🎄 Your status updates 🎄
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 48px; padding: 10px;">
+                            ☃️
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 18px; font-weight: bold; color: #424242; padding: 10px;">
+                            Your status is ${newUser.userStatus}!
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 20px; font-weight: bold; color: #3949ab; padding: 10px;">
+                            User Nickname: ${newUser.userNickname}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 18px; color: #2e7d32; padding: 10px;">
+                            User Email: ${newUser.userEmail}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size: 14px; color: #6a1b9a; font-style: italic; padding: 10px;">
+                            "Thank you for joining us, Merry Christmas!"
                             </td>
                         </tr>
                         <tr>

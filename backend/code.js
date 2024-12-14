@@ -22,3 +22,9 @@ export class OrderStatus {
     static CANCELED = "Cancelled";
     static COMPLETED = "Completed";
 }
+
+export class UserStatus {
+    static CONFIRMED = "Confirmed";
+    static APPROVAL_AWAITING = "ApprovalAwaiting";
+    static REJECTED = "Rejected";
+}

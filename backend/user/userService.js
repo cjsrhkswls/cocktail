@@ -1,10 +1,13 @@
 import { Service } from "../framework/service.js";
-import { UserDataFacade } from "./userDataFacade.js"
+import { UserDataFacade } from "./userDataFacade.js";
+import { UserStatus } from "../code.js";
+import { EmailService } from "../framework/emailService.js";
 
 export class UserService extends Service {
     constructor(){
         super();
         this.userDataFacade = new UserDataFacade();
+        this.emailService = new EmailService();
     }
 
     getAllUsers = async () => {
@@ -72,7 +75,7 @@ export class UserService extends Service {
 
         const users = await this.userDataFacade.getAllUsers();
 
-        if (users.length > 50) {
+        if (users.length > 100) {
             this.throwError(`login: Cannot proceed the login process since the number of users exceeds 50`);
         }
 
@@ -80,16 +83,40 @@ export class UserService extends Service {
         if (existingUser || existingUser !== null) {
             if (existingUser.userNickname !== newUser.userNickname){
                 existingUser.userNickname = newUser.userNickname;
-                await this.userDataFacade.updateUser(existingUser.userId, existingUser);
-            } else {
-                return existingUser;
             }
+            
+            if (existingUser.userStatus === UserStatus.REJECTED) {
+                existingUser.userStatus = UserStatus.APPROVAL_AWAITING;
+            }
+            
+            await this.userDataFacade.updateUser(existingUser.userId, existingUser);
+            
         } else {
+            newUser.userStatus = UserStatus.APPROVAL_AWAITING;
             await this.userDataFacade.createUser(newUser);
+            this.emailService.sendMailToOwnerForNewUser(newUser);
         }
 
         const createdUser = await this.userDataFacade.getUserByEmail(newUser.userEmail);
         return createdUser;
+    }
+
+    confirmUser = async (userData) => {
+        userData.userStatus = UserStatus.CONFIRMED;
+        const updatedUser = await this.updateUser(userData.userId, userData);
+        if (updatedUser){
+            this.emailService.sendMailToUserForUpdates(updatedUser);
+        }
+        return updatedUser;
+    }
+
+    rejectUser = async (userData) => {
+        userData.userStatus = UserStatus.REJECTED;
+        const updatedUser = await this.updateUser(userData.userId, userData);
+        if (updatedUser){
+            this.emailService.sendMailToUserForUpdates(updatedUser);
+        }
+        return updatedUser;
     }
 
     updateUser = async (userId, updateUser) => {
@@ -102,14 +129,6 @@ export class UserService extends Service {
 
         if (!existingUser || existingUser === null) {
             this.throwError(`The user to be updated does not exist: ${userId}!!`);
-        }
-
-        const duplicateUser = await this.userDataFacade.getUserByEmail(updateUser.userEmail);
-
-        if (duplicateUser || duplicateUser !== null) {
-            if (duplicateUser.userId !== parseInt(userId)){
-                this.throwError(`The user to be updated has a duplicate userEmail: ${updateUser.userEmail}!!`);
-            }
         }
 
         const updatedRows = await this.userDataFacade.updateUser(userId, updateUser);

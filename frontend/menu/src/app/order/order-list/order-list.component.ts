@@ -6,11 +6,12 @@ import { catchError, interval, Observable, of, switchMap } from 'rxjs';
 import { OrderListViewComponent } from "./order-list-view/order-list-view.component";
 import { AuthService } from '../../auth.service';
 import { User } from '../../model/user';
+import { NavbarComponent } from "../../common/navbar/navbar.component";
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [OrderListViewComponent],
+  imports: [OrderListViewComponent, NavbarComponent],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css'
 })
@@ -44,6 +45,7 @@ export class OrderListComponent implements OnInit {
     this.fetchMenuAliveDataRepeatedly().subscribe(i => {
       if (i){
         if (this.isDifferent(i)){
+          console.log('New order!');
           this.snackbarService.notifyMessageWithSecs('New Order has been added!', 600);
         }
         this.allOrderInfo = this.convertAllInfoToSummaries(i);
@@ -69,7 +71,7 @@ export class OrderListComponent implements OnInit {
   }
 
   isDifferent(newInfo:Info[]): boolean{
-    return this.allOrderInfo.length !== newInfo.length;
+    return this.allOrderInfo.length < newInfo.length;
   }
 
   convertInfoToSummary(info:Info){

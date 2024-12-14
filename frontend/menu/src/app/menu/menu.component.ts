@@ -8,7 +8,7 @@ import { MenuAliveViewComponent } from "./menu-alive-view/menu-alive-view.compon
 import { Router } from '@angular/router';
 import { SnackbarService } from '../common/snackbar/snackbar.service';
 import { switchMap, interval, Observable, catchError, of } from 'rxjs';
-import { OrderStatus } from '../code';
+import { OrderStatus, UserStatus } from '../code';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -54,17 +54,25 @@ export class MenuComponent implements OnInit{
         if (u) {
 
           this.currentUser = u;
-          
-          this.menuService.getMenuAlive(this.currentUser.userId).subscribe(m => {
-            if(m){
-              if (m.orderStatus === OrderStatus.REQUESTED){
-                this.menuAlive = m;
+
+          if (this.currentUser.userStatus !== UserStatus.CONFIRMED){
+            
+            this.router.navigate(['/login']);
+
+          } else {
+
+            this.menuService.getMenuAlive(this.currentUser.userId).subscribe(m => {
+              if(m){
+                if (m.orderStatus === OrderStatus.REQUESTED){
+                  this.menuAlive = m;
+                }
               }
-            }
-          });
+            });
+  
+            this.startFetchingMenuAliveData(this.currentUser.userId);
 
-          this.startFetchingMenuAliveData(this.currentUser.userId);
-
+          }
+          
         } else {
           this.router.navigate(['/login']);
         }

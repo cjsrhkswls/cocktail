@@ -55,19 +55,6 @@ router.get('/type/:type', async (req, res, next) => {
     }
 });
 
-router.post('/create', async (req, res, next) => {
-    try {
-        const { userNickname, userEmail, userType } = req.body;
-        const newUser = await userService.createUser({userNickname, userEmail, userType});
-        return res.json(newUser);
-    } catch(err){
-        console.log(err);
-        const error = new Error(`Error on duplicate user email!!`);
-        error.status = 400;
-        return next(error);
-    }
-});
-
 router.post('/login', async (req, res, next) => {
     try {
         const { userNickname, userEmail, userType } = req.body;
@@ -79,30 +66,29 @@ router.post('/login', async (req, res, next) => {
         error.status = 400;
         return next(error);
     }
-})
+});
 
-router.put('/update/:id', async (req, res, next) => {
-    const userId = req.params.id;
+router.put('/confirm', async (req, res, next) => {
     try {
-        const { userNickname, userEmail, userType } = req.body;
-        const updatedUser = await userService.updateUser(userId, {userNickname, userEmail, userType});
-        return res.json(updatedUser);
-    } catch(err) {
+        const {userId, userNickname, userEmail, userType, userStatus } = req.body;
+        const confirmedUser = await userService.confirmUser({userId, userNickname, userEmail, userType, userStatus });
+        return res.json(confirmedUser);
+    } catch(err){
         console.log(err);
-        const error = new Error(`Error on invalid request for userId: ${userId}`);
+        const error = new Error(`Error while confirming user login!!`);
         error.status = 400;
         return next(error);
     }
 });
 
-router.delete('/delete/:id', async (req, res, next) => {
-    const userId = req.params.id;
+router.put('/reject', async (req, res, next) => {
     try {
-        const deletedUser = await userService.deleteUser(userId);
-        return res.json(deletedUser);
-    } catch (err) {
+        const {userId, userNickname, userEmail, userType, userStatus } = req.body;
+        const rejectedUser = await userService.rejectUser({userId, userNickname, userEmail, userType, userStatus });
+        return res.json(rejectedUser);
+    } catch(err){
         console.log(err);
-        const error = new Error(`Error on invalid request for userId: ${userId}`);
+        const error = new Error(`Error while rejecting user login!!`);
         error.status = 400;
         return next(error);
     }

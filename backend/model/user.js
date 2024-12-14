@@ -34,6 +34,11 @@ User.init(
                 notEmpty: true,
             }
         },
+        userStatus: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            
+        },
     },
     {
         sequelize: conn,

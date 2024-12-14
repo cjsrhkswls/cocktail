@@ -1,0 +1,18 @@
+<div class="snowflakescontainer">
+    <!-- Snowflakes container -->
+    <div class="snowflakes">
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+    </div>
+    <app-navbar></app-navbar>
+    <app-user-management-view [users]="users" (confirmUserEvent)="confirmUser($event)"
+        (rejectUserEvent)="rejectUser($event)"></app-user-management-view>
+
+</div>

@@ -33,6 +33,7 @@ export class UserDataFacade {
                 userNickname: newUser.userNickname,
                 userEmail: newUser.userEmail,
                 userType: newUser.userType,
+                userStatus: newUser.userStatus,
             })
             .catch(err => {
                 console.log(err);
@@ -45,7 +46,8 @@ export class UserDataFacade {
             {
                 userNickname: newUser.userNickname,
                 userEmail: newUser.userEmail,
-                userType: newUser.userType
+                userType: newUser.userType,
+                userStatus: newUser.userStatus,
             },
             {
                 where: { userId: userId }

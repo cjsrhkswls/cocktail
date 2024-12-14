@@ -1,0 +1,19 @@
+<div class="snowflakescontainer">
+    <!-- Snowflakes container -->
+    <div class="snowflakes">
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+        <div class="snowflake">&#10052;</div>
+    </div>
+    <app-navbar></app-navbar>
+    <div class="content-container">
+        <app-menu-management-view [menus]="menus" (createMenuEvent)="createNewMenu($event)"
+            (deleteMenuEvent)="deleteMenu($event)"></app-menu-management-view>
+    </div>
+</div>

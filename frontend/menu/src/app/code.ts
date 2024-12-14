@@ -27,3 +27,9 @@ export abstract class MessageType {
     static readonly ERROR = "Error";
     static readonly INFO = "Info";
 }
+
+export abstract class UserStatus {
+    static readonly CONFIRMED = "Confirmed";
+    static readonly APPROVAL_AWAITING = "ApprovalAwaiting";
+    static readonly REJECTED = "Rejected";
+}

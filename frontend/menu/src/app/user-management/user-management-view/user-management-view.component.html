@@ -1,0 +1,28 @@
+<div class="user-container">
+    <h1 class="user-title">🎄User Management🎄</h1>
+
+    <div class="filter-container">
+        <label for="statusFilter">Filter by Status:</label>
+        <select id="statusFilter" [(ngModel)]="filterStatus">
+            <option value="">All</option>
+            <option value="{{USER_STATUS_AWAITING_APPROVAL}}">Requested</option>
+            <option value="{{USER_STATUS_CONFIRMED}}">Confirmed</option>
+            <option value="{{USER_STATUS_REJECTED}}">Rejected</option>
+        </select>
+    </div>
+
+    <div class="user-item" *ngFor="let user of filteredUsers">
+        <div class="user-details">
+            <p><strong>ID:</strong> {{ user.userId }}</p>
+            <p><strong>Nickname:</strong> {{ user.userNickname }}</p>
+            <p><strong>Email:</strong> {{ user.userEmail }}</p>
+            <p><strong>Status:</strong> {{ user.userStatus }}</p>
+        </div>
+        <div class="user-actions" *ngIf="user.userStatus===USER_STATUS_AWAITING_APPROVAL">
+            <button class="btn confirm" [disabled]="user.userStatus!==USER_STATUS_AWAITING_APPROVAL"
+                (click)="confirmUser(user)">Confirm</button>
+            <button class="btn reject" [disabled]="user.userStatus!==USER_STATUS_AWAITING_APPROVAL"
+                (click)="rejectUser(user)">Reject</button>
+        </div>
+    </div>
+</div>
